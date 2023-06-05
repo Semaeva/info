@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+</head>
+<body>
+{% for i in news %}
+<p>{{ i.title }}</p>
+<p>{{ i.description }}</p>
+
+<img src="{{ i.image.url }}"  alt="...">
+
+{% endfor %}
+
+{%  for j in newsImg %}
+<img src="{{j.image.url}}"  alt="...">
+{% endfor %}
+
+</body>
+</html>
