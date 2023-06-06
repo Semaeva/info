@@ -1,9 +1,35 @@
 from datetime import datetime
 
-from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+
 from embed_video.fields import EmbedVideoField
+from hitcount.models import HitCountMixin, HitCount
+from django.contrib.contenttypes.fields import GenericRelation
+from django.utils.text import slugify
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=250)
+
+    # body = HTMLField()
+    date = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(default='', editable=False, max_length=160)
+    hit_count_generic = GenericRelation(HitCount, object_id_field='object_p',
+                                        related_query_name='hit_count_generic_relation')
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        super(Post, self).save(*args, **kwargs)
+
+        value = self.title
+        self.slug = slugify(value, allow_unicode=True)
+        super().save(*args, **kwargs)
+
+
 
 
 class News(models.Model):

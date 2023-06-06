@@ -4,8 +4,21 @@ from .models import *
 from django.db.models import Q
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
-from django.contrib.admin.models import LogEntry, ADDITION
 from django.contrib.contenttypes.models import ContentType
+from hitcount.views import HitCountDetailView
+from django.views.generic.detail import DetailView
+
+
+def blog(request):
+    context={}
+    return render(request, "blog.html", context)
+
+
+class PostDetailView(HitCountDetailView):
+    model = Post
+    template_name = 'post.html'
+    slug_field = "slug"
+    count_hit = True
 
 
 def news_list(request):
@@ -61,16 +74,16 @@ def my_view(request):
     return HttpResponse("Страница")
 
 
-def get_page_views(url):
-    content_type = ContentType.objects.get_for_model(PageView)
-    page_views_count = PageView.objects.filter(
-        content_type=content_type,
-        object_id=url,
-    ).count()
-    return page_views_count
-
-
-def count_view():
-    page_url = "/my-page/"
-    views_count = get_page_views(page_url)
-    print(f"Количество просмотров страницы {page_url}: {views_count}")
+# def get_page_views(url):
+#         content_type = ContentType.objects.get_for_model(PageView)
+#     page_views_count = PageView.objects.filter(
+#         content_type=content_type,
+#         object_id=url,
+#     ).count()
+#     return page_views_count
+#
+#
+# def count_view():
+#     page_url = "/my-page/"
+#     views_count = get_page_views(page_url)
+#     print(f"Количество просмотров страницы {page_url}: {views_count}")
