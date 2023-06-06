@@ -4,5 +4,6 @@ from .views import *
 
 urlpatterns = [
     path('', news_list),
+    path('search/', search),
 
 ]

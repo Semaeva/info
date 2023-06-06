@@ -3,7 +3,7 @@
 {% load static %}
 <html>
 <head>
-<title>News Magazine</title>
+<title>Uuru Kg</title>
   <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet"  href="{% static 'layout/styles/layout.css' %}" type="text/css" />
@@ -57,15 +57,15 @@
         <li class="last"><a href="#">A Long Link Text</a></li>
       </ul>
     </div>
-    <div id="search">
-      <form action="#" method="post">
-        <fieldset>
-          <legend>??????? ????????</legend>
-          <input type="text" value="Search Our Website&hellip;"  onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;" />
-          <input type="submit" name="go" id="go" value="Search" />
-        </fieldset>
-      </form>
-    </div>
+<!--    <div id="search">-->
+<!--      <form action="#" method="post">-->
+<!--        <fieldset>-->
+<!--          <legend>Веедите инициалы</legend>-->
+<!--          <input type="text" value="Search Our Website&hellip;"  onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;" />-->
+<!--          <input type="submit" name="go" id="go" value="Search" />-->
+<!--        </fieldset>-->
+<!--      </form>-->
+<!--    </div>-->
     <br class="clear" />
   </div>
 </div>
@@ -80,7 +80,7 @@
             <div class="panel-overlay">
               <h2>{{ i.title }}</h2>
               <p>{{ i.description }}<br />
-                <a href="#">?????????</a></p>
+                <a href="#">Подробнее</a></p>
             </div>
           </li>
 
@@ -93,14 +93,28 @@
     <div class="column">
       <ul class="latestnews">
         <li><img src="images/demo/100x100.gif" alt="" />
-          <p><strong><a href="#">Indonectetus facilis leo.</a></strong> Nullamlacus dui ipsum cons eque loborttis non euis que morbi penas dapibulum orna. Urnaultrices quis curabitur phasellentesque.</p>
+
+  <div id="search">
+      <form action="search/" method="post">
+         {% csrf_token %}
+        <fieldset>
+          <legend>Веедите инициалы</legend>
+          <p>Введите инициалы</p>
+          <input type="text" name ="name"   onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;" />
+        <p>Введите должность</p>
+          <input type="text" name ="position"  onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;" />
+          <input type="submit" name="go" id="go" value="Search" />
+        </fieldset>
+      </form>
+    </div>
+
         </li>
-        <li><img src="images/demo/100x100.gif" alt="" />
-          <p><strong><a href="#">Indonectetus facilis leo.</a></strong> Nullamlacus dui ipsum cons eque loborttis non euis que morbi penas dapibulum orna. Urnaultrices quis curabitur phasellentesque.</p>
-        </li>
-        <li class="last"><img src="images/demo/100x100.gif" alt="" />
-          <p><strong><a href="#">Indonectetus facilis leo.</a></strong> Nullamlacus dui ipsum cons eque loborttis non euis que morbi penas dapibulum orna. Urnaultrices quis curabitur phasellentesque.</p>
-        </li>
+<!--        <li><img src="images/demo/100x100.gif" alt="" />-->
+<!--          <p><strong><a href="#">Indonectetus facilis leo.</a></strong> Nullamlacus dui ipsum cons eque loborttis non euis que morbi penas dapibulum orna. Urnaultrices quis curabitur phasellentesque.</p>-->
+<!--        </li>-->
+<!--        <li class="last"><img src="images/demo/100x100.gif" alt="" />-->
+<!--          <p><strong><a href="#">Indonectetus facilis leo.</a></strong> Nullamlacus dui ipsum cons eque loborttis non euis que morbi penas dapibulum orna. Urnaultrices quis curabitur phasellentesque.</p>-->
+<!--        </li>-->
       </ul>
     </div>
     <br class="clear" />
@@ -118,7 +132,7 @@
 
   <div id="hpage_cats">
     <div class="fl_left">
-      <h2><a href="#">????????? &raquo;</a></h2>
+      <h2><a href="#">Экономика &raquo;</a></h2>
 <!--      <img src="images/demo/100x100.gif" alt="" />-->
       {% for i in newsEcnom %}
       <div>
@@ -131,18 +145,25 @@
 
 
     <div class="fl_right">
-      <h2><a href="#">???????????? &raquo;</a></h2>
-      <img src="images/demo/100x100.gif" alt="" />
-      <p><strong><a href="#">Indonectetus facilis leo.</a></strong></p>
-      <p>This template is distributed using a <a href="http://www.os-templates.com/template-terms">Website Template Licence</a>, which allows you to use and modify the template for both personal and commercial use when you keep the provided credit links in the footer.</p>
-    </div>
+      <h2><a href="#">Преступления &raquo;</a></h2>
+      {% for i in newsCriminal %}
+        <div>
+        <img src="{{ i.image.url }}" alt="" class="news" />
+       </div>
+        <div><strong><a href="#">{{i.title}}</a></strong></div>
+        <div> {{ i.description }}</div>
+        {% endfor %}
     <br class="clear" />
+
     <div class="fl_left">
-      <h2><a href="#">????? &raquo;</a></h2>
-      <img src="images/demo/100x100.gif" alt="" />
-      <p><strong><a href="#">Indonectetus facilis leo.</a></strong></p>
-      <p>Morbitincidunt maurisque eros molest nunc anteget sed vel lacus mus semper. Anterdumnullam interdum eros dui urna consequam ac nisl nullam ligula vestassa. Condimentumfelis et amet tellent quisquet a leo lacus nec augue accumsan sagittislaorem dolor sum at urna.</p>
-    </div>
+      <h2><a href="#">Спорт &raquo;</a></h2>
+      {% for i in newsSport %}
+        <div>
+        <img src="{{ i.image.url }}" alt="" class="news" />
+       </div>
+        <div><strong><a href="#">{{i.title}}</a></strong></div>
+        <div> {{ i.description }}</div>
+        {% endfor %}</div>
     <div class="fl_right">
       <h2><a href="#">Politics &raquo;</a></h2>
       <img src="images/demo/100x100.gif" alt="" />

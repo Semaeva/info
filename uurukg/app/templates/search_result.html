@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% for i in person %}
+<p>{{i.name}}</p>
+<p>{{i.position}}</p>
+<p>{{i.resume}}</p>
+<p>{{i.dop_info}}</p>
+{% endfor %}
+</body>
+</html>
