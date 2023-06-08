@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Новости экономики</title>
+</head>
+<body>
+<table class="table">
+    <tr>
+        <th>title</th>
+        <th>описание</th>
+        <th>дата создания</th>
+    </tr>
+    {% for i in news %}
+    <tr>
+        <td>{{i.title}}</td>
+        <td>{{i.decription}}</td>
+        <td>{{i.created_date}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+</body>
+</html>

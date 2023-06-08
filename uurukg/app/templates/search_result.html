@@ -6,12 +6,15 @@
     <title>Title</title>
 </head>
 <body>
-
+{% if person %}
 {% for i in person %}
 <p>{{i.name}}</p>
 <p>{{i.position}}</p>
 <p>{{i.resume}}</p>
 <p>{{i.dop_info}}</p>
 {% endfor %}
+{% else %}
+<p>Not found</p>
+{% endif %}
 </body>
 </html>

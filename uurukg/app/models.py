@@ -1,35 +1,41 @@
 from datetime import datetime
+from django.utils import timezone as tz
 
+from autoslug import AutoSlugField
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 from embed_video.fields import EmbedVideoField
-from hitcount.models import HitCountMixin, HitCount
-from django.contrib.contenttypes.fields import GenericRelation
-from django.utils.text import slugify
+
+from ckeditor.fields import RichTextField
+from hitcount.models import HitCount
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=250)
-
-    # body = HTMLField()
-    date = models.DateTimeField(auto_now_add=True)
-    slug = models.SlugField(default='', editable=False, max_length=160)
-    hit_count_generic = GenericRelation(HitCount, object_id_field='object_p',
-                                        related_query_name='hit_count_generic_relation')
+    title = models.CharField(max_length=225)
+    slug = AutoSlugField(populate_from='title')
+    overview = RichTextField()
+    category = models.ForeignKey("Category", on_delete=models.CASCADE, blank=True, null=True)
+    created_date = models.DateField(auto_now_add=False)
 
     def __str__(self):
         return self.title
 
-    def save(self, *args, **kwargs):
-        super(Post, self).save(*args, **kwargs)
-
-        value = self.title
-        self.slug = slugify(value, allow_unicode=True)
-        super().save(*args, **kwargs)
+    class Meta:
+        ordering = ['-created_date']
+        verbose_name = "Новости"
+        verbose_name_plural = "Новости"
 
 
+# class PostDetailView(DetailView):
+#     model = Post
+#     template_name = 'post.html'
+#     slug_field = "slug"
+#     count_hit = True
+#
+#     def __str__(self):
+#         return  self.count_hit
 
 
 class News(models.Model):
@@ -39,6 +45,7 @@ class News(models.Model):
     order_date = models.DateField()
     image = models.ImageField(upload_to='newsImage/', blank=True, null=True)
     category = models.ForeignKey("Category", on_delete=models.CASCADE, blank=True, null=True)
+    # slug = models.SlugField(default='', editable=False, max_length=160)
 
     def __str__(self):
         return self.title
@@ -83,7 +90,7 @@ class Govno(models.Model):
     criminal_record = models.BooleanField(default=False)
     years = models.CharField(max_length=100)
     image = models.ImageField(upload_to='avatars/', blank=True, null=True)
-    video = EmbedVideoField()
+    video = EmbedVideoField(blank=True, null=True)
 
     def __str__(self):
         return self.name

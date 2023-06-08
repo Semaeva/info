@@ -1,11 +1,89 @@
 <!DOCTYPE html>
-{% load hitcount_tags %}
+<!--{% load hitcount_tags %}-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Главная</title>
 </head>
 <body>
-<h2>{{post.title}}</h2>
+
+
+<h2>Категории</h2>
+<div><h3>Топ новостей</h3>
+<table class="table">
+    <tr>
+        <th>Новость</th>
+        <th>описание</th>
+    </tr>
+    {% for i in top %}
+    <tr>
+    <td>{{i}}</td>
+    <td>{{i.overview | safe}}</td>
+        </tr>
+    {% endfor %}
+</table>
+    <br> <br> <br> <br> <br> <br> <br>
+
+
+<div><h3>Экономика</h3>
+<table class="table">
+    <tr>
+        <th>Новость</th>
+        <th>описание</th>
+    </tr>
+    {% for i in newsEcnom %}
+    <tr>
+        <td>{{i.title}}</td>
+        <td><a href="{% url 'post' i.title %}">Подробнее</a></td>
+            </tr>
+    {% endfor %}
+</table>
+    <br> <br> <br> <br> <br> <br> <br>
+</div>
+<div><h3>Преступления</h3>
+    <table class="table">
+    <tr>
+        <th>Новость</th>
+        <th>описание</th>
+    </tr>
+    {% for cr in newsCriminal %}
+    <tr>
+        <td>{{cr.title}}</td>
+        <td><a href="{% url 'post' cr.title %}">Подробнее</a></td>
+            </tr>
+    {% endfor %}
+</table>
+</div>
+ <br> <br> <br> <br> <br> <br>
+<div><h3>Спорт</h3>
+<table class="table">
+    <tr>
+        <th>Новость</th>
+        <th>описание</th>
+    </tr>
+    {% for i in newsSport %}
+    <tr>
+        <td>{{i.title}}</td>
+        <td><a href="{% url 'post' i.title %}">Подробнее</a></td>
+            </tr>
+    {% endfor %}
+</table>
+     <br> <br> <br> <br>
+</div>
+
+<div id="search">
+      <form action="search/" method="post">
+         {% csrf_token %}
+        <fieldset>
+          <legend>Веедите инициалы</legend>
+          <p>Введите инициалы</p>
+          <input type="text" name ="name"   onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;" />
+        <p>Введите должность</p>
+          <input type="text" name ="position"  onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;" />
+          <input type="submit" name="go" id="go" value="Search" />
+        </fieldset>
+      </form>
+    </div>
+
 </body>
 </html>
