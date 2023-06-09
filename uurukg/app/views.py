@@ -34,11 +34,13 @@ def posts(request):
     newsSport = Post.objects.filter(category=3).all()[:3]
     newsCriminal = Post.objects.filter(category=1).all()[:3]
     newsTop = Post.objects.filter(top_news=True).all()[:3]
+    sng = NewsSNG.objects.all()[:3]
     return render(request, "index.html", {'posts': posts,
                                          'newsEconom': newsEcnom,
                                          'newsSport': newsSport,
                                          'newsCriminal': newsCriminal,
-                                         'top': newsTop
+                                         'top': newsTop,
+                                          'sng':sng
                                        })
 
 
@@ -58,6 +60,11 @@ def economic_list(request):
     return render(request, 'econom.html', {'news': news})
 
 
+def sng_list(request):
+    news = NewsSNG.objects.all()
+    return render(request, 'sng.html', {'news': news})
+
+
 def criminal_list(request):
     news = Post.objects.filter(category=1)
     return render(request, 'crimanal.html', {'news': news})
@@ -68,11 +75,28 @@ def sport_list(request):
     return render(request, 'sport.html', {'news': news})
 
 
+def repoter_list(request):
+    news = Post.objects.filter(category=7)
+    return render(request, 'reporter.html', {'news': news})
+
+def analitika_list(request):
+    news = Post.objects.filter(category=4)
+    return render(request, 'analitika.html', {'news': news})
+
+
 def news_list(request):
     news = Post.objects.all()
     return render(request, 'all_news.html', {'news': news})
 
 
+def opg_list(request):
+    news = Post.objects.filter(category=6)
+    return render(request, 'opg.html', {'news': news})
+
+
+def korrupcia_list(request):
+    news = Post.objects.filter(category=5)
+    return render(request, 'korrupcia.html', {'news': news})
 #
 # class PostDetailView(HitCountDetailView):
 #     model = Post
