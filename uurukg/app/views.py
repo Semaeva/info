@@ -79,17 +79,17 @@ def economic_list(request):
     return render(request, 'detail.html', {'news': news})
 
 
-def all_view(request, id):
-    my_object = get_object_or_404(Post, id=id)
-
-    # Увеличение счетчика просмотров
-    my_object.hit_count_generic.hit()
-    return render(request, 'views.html', {'my_object': my_object})
-
-
-def news_detail(request, id):
-    news = Post.objects.get(id=id)
-    return render(request, 'detail.html', {'news': news})
+# def all_view(request, id):
+#     my_object = get_object_or_404(Post, id=id)
+#
+#     # Увеличение счетчика просмотров
+#     my_object.hit_count_generic.hit()
+#     return render(request, 'views.html', {'my_object': my_object})
+#
+#
+# def news_detail(request, id):
+#     news = Post.objects.get(id=id)
+#     return render(request, 'detail.html', {'news': news})
 
 
 # class NewsDetailView(DetailView):

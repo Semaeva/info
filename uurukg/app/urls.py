@@ -5,9 +5,9 @@ from .views import *
 urlpatterns = [
     path('', posts),
     path('blog/search/', search),
-
-    path('detail/<int:id>', news_detail),
-    path('economic/all', economic_list),
+    #
+    # path('detail/<int:id>', news_detail),
+    # path('economic/all', economic_list),
     path('post/<int:pk>/', PostDetailView.as_view(), name='posts-detail'),
 
 
