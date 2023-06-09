@@ -3,14 +3,25 @@ from .views import *
 
 
 urlpatterns = [
-    path('', news_list),
+    path('', posts),
     path('blog/search/', search),
 
-    path('econom/', economic_list),
-    path("blog/", posts),
-    # path('<slug>', NewsDetailView.as_view(), name="news"),
+    path('detail/<int:id>', news_detail),
+    path('economic/all', economic_list),
+    path('post/<int:pk>/', PostDetailView.as_view(), name='posts-detail'),
+
+
+    # path('views/<int:id>', all_view),
+    # path('top/all', top_list),
+    # path('econom/<int:id>', news_detail),
+    # path('econom/<int:id>', news_detail),
+    # path('econom/<int:id>', news_detail),
+    # path("blog/", posts),
+
+    # path('news/<int:pk>/', NewsDetailView.as_view(), name='news-detail'),
+
     # path('<slug>', PostDetailView.as_view(), name='post'),
-     path('post/<slug>', PostDetailView.as_view(), name='post'),
+
     # path('blog/<int:pk>/', PostDetailView.as_view(), name='post'),
     # path('<slug:slug>/',PostDetailView.as_view().index)
     # path('club/<int:pk>', schedule_list),

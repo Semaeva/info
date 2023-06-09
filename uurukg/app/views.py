@@ -1,6 +1,6 @@
 import hitcount.models
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from hitcount.models import Hit
 
 from .models import *
@@ -9,89 +9,93 @@ from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 from django.contrib.contenttypes.models import ContentType
 from hitcount.views import HitCountDetailView
-
+from hitcount.models import HitCount
 from django.views.generic.detail import DetailView
-from autoslug import AutoSlugField
 
 
 def list_top_news():
-    top_list=list()
-    for i in list(HitCount.objects.all()):
-        top_list.append(i.hits)
-    list_sort = sorted(top_list)
-    top_three = list_sort[-3:]
-    return top_three
+    data = list()
+    # top_list=list()
+    # for i in list(HitCount.objects.all()):
+    #     top_list.append(i.hits)
+    for i in HitCount.objects.all():
+        data.append(i.object_pk)
+    if data:
+        sort_data = sorted(data)
+        tt = Post.objects.filter(id__range=(data[0], sort_data.pop()))
+        return tt
+    else:
+        return 0
 
 
 def posts(request):
-    data = list()
     posts = Post.objects.all()
     newsEcnom = Post.objects.filter(category=2).all()
     newsSport = Post.objects.filter(category=3).all()
     newsCriminal = Post.objects.filter(category=1).all()
-    top = list(HitCount.objects.filter(hits__range=(list_top_news()[0], list_top_news()[-1])).all())[-2:]
-    for i in HitCount.objects.all():
-        data.append(i.object_pk)
-    #print(i.object_pk)
-
-    return render(request, "blog.html", {'posts': posts,
+    newsTop = Post.objects.filter(top_news=True).all()[:4]
+    return render(request, "index.html", {'posts': posts,
                                          'newsEconom': newsEcnom,
                                          'newsSport': newsSport,
                                          'newsCriminal': newsCriminal,
-                                         'top': top
+                                         'top': newsTop
                                        })
 
 
 class PostDetailView(HitCountDetailView):
     model = Post
-    template_name = 'post.html'
-    slug_field = "slug"
+    template_name = 'detail.html'
     count_hit = True
 
-    def __str__(self):
-        return  self.count_hit
 
+#
 # class PostDetailView(HitCountDetailView):
 #     model = Post
-#     template_name = "post.html"
-#     slug_field = "slug"
-
-# class PostDetailView(HitCountDetailView):
-#     model = News
-#     template_name = 'econom.html'
+#     template_name = 'post.html'
 #     slug_field = "slug"
 #     count_hit = True
 
-
-def news_list(request):
-    news = News.objects.order_by('-id')[:5]
-    newsImg = NewsImage.objects.all()
-    newsTop = News.objects.all()
-    newsEcnom = News.objects.filter(category= 1 ).all()
-    newsSport = News.objects.filter(category= 3 ).all()
-    newsCriminal = News.objects.filter(category= 2 ).all()
-    return render(request, 'index.html', {'news': news,
-                                          'newsImg':newsImg,
-                                          'newsEcnom':newsEcnom,
-                                          'newsCriminal': newsCriminal,
-                                          'newsSport': newsSport
-                                          })
+    # def __str__(self):
+    #     return self.count_hit
 
 
-# def word_list():
-#     word_lists_name = tuple(Govno.objects.values_list('name', flat=True))
-#     word_lists_position = tuple(Govno.objects.values_list('position', flat=True))
-#     return word_lists_name+word_lists_position
+# def news_list(request):
+#     news = News.objects.order_by('-id')[:5]
+#     newsImg = NewsImage.objects.all()
+#     newsTop = News.objects.all()
+#     newsEcnom = News.objects.filter(category= 1 ).all()
+#     newsSport = News.objects.filter(category= 3 ).all()
+#     newsCriminal = News.objects.filter(category= 2 ).all()
+#     return render(request, 'index.html', {'news': news,
+#                                           'newsImg':newsImg,
+#                                           'newsEcnom':newsEcnom,
+#                                           'newsCriminal': newsCriminal,
+#                                           'newsSport': newsSport
+#                                           })
+
 
 def economic_list(request):
-    news = News.objects.filter(category= 1 ).all()
-    return render(request, 'econom.html', {'news':news})
+    news = Post.objects.filter(category=2)
+    return render(request, 'detail.html', {'news': news})
 
 
-class NewsDetailView(DetailView):
-    model = News
-    template_name = "detail_news.html"
-    slug_field = "slug"
+def all_view(request, id):
+    my_object = get_object_or_404(Post, id=id)
+
+    # Увеличение счетчика просмотров
+    my_object.hit_count_generic.hit()
+    return render(request, 'views.html', {'my_object': my_object})
+
+
+def news_detail(request, id):
+    news = Post.objects.get(id=id)
+    return render(request, 'detail.html', {'news': news})
+
+
+# class NewsDetailView(DetailView):
+#     model = News
+#     template_name = "detail_news.html"
+#     slug_field = "slug"
 
 
 def search(request):
@@ -119,29 +123,4 @@ def search(request):
         return render(request, 'search_result.html', {'person': 0})
 
 
-def my_view(request):
-    current_url = request.path
-    content_type = ContentType.objects.get_for_model(PageView)
 
-    # Увеличить счетчик просмотров
-    PageView.objects.create(
-        content_type=content_type,
-        object_id=current_url,
-    )
-    # return render(request, 'my_template.html')
-    return HttpResponse("Страница")
-
-
-# def get_page_views(url):
-#         content_type = ContentType.objects.get_for_model(PageView)
-#     page_views_count = PageView.objects.filter(
-#         content_type=content_type,
-#         object_id=url,
-#     ).count()
-#     return page_views_count
-#
-#
-# def count_view():
-#     page_url = "/my-page/"
-#     views_count = get_page_views(page_url)
-#     print(f"Количество просмотров страницы {page_url}: {views_count}")

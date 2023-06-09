@@ -12,15 +12,19 @@
 <div><h3>Топ новостей</h3>
 <table class="table">
     <tr>
-        <th>Новость</th>
+        <th>Наименование</th>
         <th>описание</th>
+        <th>Детально</th>
     </tr>
+    {% if top != 0 %}
     {% for i in top %}
     <tr>
     <td>{{i}}</td>
     <td>{{i.overview | safe}}</td>
+        <td><a href="{% url 'post' i.title %}">Подробнее</a></td>
         </tr>
     {% endfor %}
+    {% endif %}
 </table>
     <br> <br> <br> <br> <br> <br> <br>
 
@@ -31,7 +35,7 @@
         <th>Новость</th>
         <th>описание</th>
     </tr>
-    {% for i in newsEcnom %}
+    {% for i in newsEconom %}
     <tr>
         <td>{{i.title}}</td>
         <td><a href="{% url 'post' i.title %}">Подробнее</a></td>
