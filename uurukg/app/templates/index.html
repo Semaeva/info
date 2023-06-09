@@ -9,24 +9,24 @@
 
 
 <h2>Категории</h2>
-<!--<div><h3>Топ новостей</h3>-->
-<!--<table class="table">-->
-<!--    <tr>-->
-<!--        <th>Наименование</th>-->
-<!--        <th>описание</th>-->
-<!--        <th>Детально</th>-->
-<!--    </tr>-->
-<!--    {% if top != 0 %}-->
-<!--        {% for i in newsTop %}-->
-<!--            <tr>-->
-<!--                <td>{{i}}</td>-->
-<!--                <td>{{i.overview | safe}}</td>-->
-<!--                <td><a href="{% url 'post' i.title %}">Подробнее</a></td>-->
-<!--            </tr>-->
-<!--        {% endfor %}-->
-<!--    {% endif %}-->
-<!--</table>-->
-<!--    <br> <br> <br> <br> <br> <br> <br>-->
+<div><h3>Топ новостей</h3>
+<table class="table">
+    <tr>
+        <th>Наименование</th>
+        <th>описание</th>
+        <th>Детально</th>
+    </tr>
+    {% if top != 0 %}
+        {% for i in newsTop %}
+            <tr>
+                <td>{{i}}</td>
+                <td>{{i.overview | safe}}</td>
+                <td><a href="{% url 'post' i.title %}">Подробнее</a></td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+</table>
+    <br> <br> <br> <br> <br> <br> <br>
 
 
 <div><h3>Экономика</h3>

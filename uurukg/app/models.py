@@ -44,22 +44,22 @@ class PostDetailView(HitCountDetailView):
         return context
 
 
-# class Press_release(models.Model):
-#     title = models.CharField(max_length=225)
-#     overview = RichTextField()
-#     category = models.ForeignKey("Category", on_delete=models.CASCADE, blank=True, null=True)
-#     created_date = models.DateField(auto_now_add=False)
-#     image = models.ImageField(upload_to='pressRelease/', blank=True, null=True)
-#     description = models.TextField(default='')
-#     top_news = models.BooleanField(default=False)
-#
-#     def __str__(self):
-#         return self.title
-#
-#     class Meta:
-#         ordering = ['-created_date']
-#         verbose_name = "Пресс-Релизы"
-#         verbose_name_plural = "Пресс-Релизы"
+class Press_release(models.Model):
+    title = models.CharField(max_length=225)
+    overview = RichTextField()
+    departments = models.ForeignKey("Department", on_delete=models.CASCADE, blank=True, null=True)
+    created_date = models.DateField(auto_now_add=False)
+    image = models.ImageField(upload_to='pressRelease/', blank=True, null=True)
+    description = models.TextField(default='')
+    top_news = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['-created_date']
+        verbose_name = "Пресс-Релизы"
+        verbose_name_plural = "Пресс-Релизы"
 
 
 class NewsImage(models.Model):
@@ -83,6 +83,17 @@ class Category(models.Model):
     class Meta:
         verbose_name = "Категория"
         verbose_name_plural = "Категория"
+
+
+class Department(models.Model):
+    title = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Министерства и учреждения"
+        verbose_name_plural = "Министерства и учреждения"
 
 
 class Govno(models.Model):

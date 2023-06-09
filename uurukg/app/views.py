@@ -30,9 +30,9 @@ def list_top_news():
 
 def posts(request):
     posts = Post.objects.all()
-    newsEcnom = Post.objects.filter(category=2).all()
-    newsSport = Post.objects.filter(category=3).all()
-    newsCriminal = Post.objects.filter(category=1).all()
+    newsEcnom = Post.objects.filter(category=2).all()[:1]
+    newsSport = Post.objects.filter(category=3).all()[:1]
+    newsCriminal = Post.objects.filter(category=1).all()[:1]
     newsTop = Post.objects.filter(top_news=True).all()[:4]
     return render(request, "index.html", {'posts': posts,
                                          'newsEconom': newsEcnom,
@@ -46,6 +46,11 @@ class PostDetailView(HitCountDetailView):
     model = Post
     template_name = 'detail.html'
     count_hit = True
+
+
+def release_list(request):
+    news = Press_release.objects.all()
+    return render(request, 'release.html', {'news': news})
 
 
 #
@@ -74,9 +79,9 @@ class PostDetailView(HitCountDetailView):
 #                                           })
 
 
-def economic_list(request):
-    news = Post.objects.filter(category=2)
-    return render(request, 'detail.html', {'news': news})
+# def economic_list(request):
+#     news = Post.objects.filter(category=2)
+#     return render(request, 'detail.html', {'news': news})
 
 
 # def all_view(request, id):
