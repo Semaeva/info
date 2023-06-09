@@ -121,7 +121,7 @@
                     <div class="overlay">
                         <div class="mb-2">
                             <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                               href="">{{i.title}}</a>
+                               href="post/{{i.id}}+">{{i.title}}</a>
                             <a class="text-white" href="">{{i.created_date}}</a>
                         </div>
                     </div>
@@ -158,7 +158,7 @@
                             <div class="col-12">
                                 <div class="section-title">
                                     <h4 class="m-0 text-uppercase font-weight-bold">Последние новости</h4>
-                                    <a class="text-secondary font-weight-medium text-decoration-none" href="">Смотреть
+                                    <a class="text-secondary font-weight-medium text-decoration-none" href="news/all">Смотреть
                                         все</a>
                                 </div>
                             </div>
@@ -171,200 +171,26 @@
                                     <div class="bg-white border border-top-0 p-4">
                                         <div class="mb-2">
                                             <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                               href="">{{ i.category.title }}</a>
-                                            <a class="text-body" href=""><small>{{ i.created_date }}</small></a>
+                                               href="##">{{ i.category.title }}</a>
+                                            <a class="text-body" href="post/{{i.id}}"><small>{{ i.created_date }}</small></a>
                                         </div>
                                         <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"
-                                           href="">{{ i.title }}</a>
+                                           href="post/{{i.id}}">{{ i.title }}</a>
                                         <p class="m-0">{{ i.description }}</p>
                                     </div>
                                     <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
                                         <div class="d-flex align-items-center">
                                         </div>
                                         <div class="d-flex align-items-center">
-                                            <a href="#">Читать поробнее...</a>
+                                            <a href="post/{{i.id}}">Читать поробнее...</a>
+
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
                                {% endfor %}
-<!--                            <div class="col-lg-6">-->
-<!--                                <div class="position-relative mb-3">-->
-<!--                                    <img class="img-fluid w-100" src="img/news-700x435-1.jpg"-->
-<!--                                         style="object-fit: cover;">-->
-<!--                                    <div class="bg-white border border-top-0 p-4">-->
-<!--                                        <div class="mb-2">-->
-<!--                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"-->
-<!--                                               href="">Экономика</a>-->
-<!--                                            <a class="text-body" href=""><small>8 июля 2023</small></a>-->
-<!--                                        </div>-->
-<!--                                        <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"-->
-<!--                                           href="">Lorem ipsum dolor sit amet elit...</a>-->
-<!--                                        <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna-->
-<!--                                            rebum clita rebum dolor stet amet justo</p>-->
-<!--                                    </div>-->
-<!--                                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                        </div>-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                            <a href="#">Читать поробнее...</a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-12 mb-3">-->
-<!--                                <a href=""><img class="img-fluid w-100" src="img/ads-728x90.png" alt=""></a>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-6">-->
-<!--                                <div class="position-relative mb-3">-->
-<!--                                    <img class="img-fluid w-100" src="img/news-700x435-1.jpg"-->
-<!--                                         style="object-fit: cover;">-->
-<!--                                    <div class="bg-white border border-top-0 p-4">-->
-<!--                                        <div class="mb-2">-->
-<!--                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"-->
-<!--                                               href="">Спорт</a>-->
-<!--                                            <a class="text-body" href=""><small>8 июля 2023</small></a>-->
-<!--                                        </div>-->
-<!--                                        <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"-->
-<!--                                           href="">Lorem ipsum dolor sit amet elit...</a>-->
-<!--                                        <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna-->
-<!--                                            rebum clita rebum dolor stet amet justo</p>-->
-<!--                                    </div>-->
-<!--                                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                        </div>-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                            <a href="#">Читать поробнее...</a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-6">-->
-<!--                                <div class="position-relative mb-3">-->
-<!--                                    <img class="img-fluid w-100" src="img/news-700x435-1.jpg"-->
-<!--                                         style="object-fit: cover;">-->
-<!--                                    <div class="bg-white border border-top-0 p-4">-->
-<!--                                        <div class="mb-2">-->
-<!--                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"-->
-<!--                                               href="">Преступления</a>-->
-<!--                                            <a class="text-body" href=""><small>8 июля 2023</small></a>-->
-<!--                                        </div>-->
-<!--                                        <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"-->
-<!--                                           href="">Lorem ipsum dolor sit amet elit...</a>-->
-<!--                                        <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna-->
-<!--                                            rebum clita rebum dolor stet amet justo</p>-->
-<!--                                    </div>-->
-<!--                                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                        </div>-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                            <a href="#">Читать поробнее...</a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-6">-->
-<!--                                <div class="position-relative mb-3">-->
-<!--                                    <img class="img-fluid w-100" src="img/news-700x435-1.jpg"-->
-<!--                                         style="object-fit: cover;">-->
-<!--                                    <div class="bg-white border border-top-0 p-4">-->
-<!--                                        <div class="mb-2">-->
-<!--                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"-->
-<!--                                               href="">Экономика</a>-->
-<!--                                            <a class="text-body" href=""><small>8 июля 2023</small></a>-->
-<!--                                        </div>-->
-<!--                                        <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"-->
-<!--                                           href="">Lorem ipsum dolor sit amet elit...</a>-->
-<!--                                        <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna-->
-<!--                                            rebum clita rebum dolor stet amet justo</p>-->
-<!--                                    </div>-->
-<!--                                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                        </div>-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                            <a href="#">Читать поробнее...</a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-6">-->
-<!--                                <div class="position-relative mb-3">-->
-<!--                                    <img class="img-fluid w-100" src="img/news-700x435-1.jpg"-->
-<!--                                         style="object-fit: cover;">-->
-<!--                                    <div class="bg-white border border-top-0 p-4">-->
-<!--                                        <div class="mb-2">-->
-<!--                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"-->
-<!--                                               href="">Преступления</a>-->
-<!--                                            <a class="text-body" href=""><small>8 июля 2023</small></a>-->
-<!--                                        </div>-->
-<!--                                        <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"-->
-<!--                                           href="">Lorem ipsum dolor sit amet elit...</a>-->
-<!--                                        <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna-->
-<!--                                            rebum clita rebum dolor stet amet justo</p>-->
-<!--                                    </div>-->
-<!--                                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                        </div>-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                            <a href="#">Читать поробнее...</a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-6">-->
-<!--                                <div class="position-relative mb-3">-->
-<!--                                    <img class="img-fluid w-100" src="img/news-700x435-1.jpg"-->
-<!--                                         style="object-fit: cover;">-->
-<!--                                    <div class="bg-white border border-top-0 p-4">-->
-<!--                                        <div class="mb-2">-->
-<!--                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"-->
-<!--                                               href="">Преступления</a>-->
-<!--                                            <a class="text-body" href=""><small>8 июля 2023</small></a>-->
-<!--                                        </div>-->
-<!--                                        <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"-->
-<!--                                           href="">Lorem ipsum dolor sit amet elit...</a>-->
-<!--                                        <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna-->
-<!--                                            rebum clita rebum dolor stet amet justo</p>-->
-<!--                                    </div>-->
-<!--                                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                        </div>-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                            <a href="#">Читать поробнее...</a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-6">-->
-<!--                                <div class="position-relative mb-3">-->
-<!--                                    <img class="img-fluid w-100" src="{% static 'img/news-700x435-1.jpg' %}"-->
-<!--                                         style="object-fit: cover;">-->
-<!--                                    <div class="bg-white border border-top-0 p-4">-->
-<!--                                        <div class="mb-2">-->
-<!--                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"-->
-<!--                                               href="">Преступления</a>-->
-<!--                                            <a class="text-body" href=""><small>8 июля 2023</small></a>-->
-<!--                                        </div>-->
-<!--                                        <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"-->
-<!--                                           href="">Lorem ipsum dolor sit amet elit...</a>-->
-<!--                                        <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna-->
-<!--                                            rebum clita rebum dolor stet amet justo</p>-->
-<!--                                    </div>-->
-<!--                                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                        </div>-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                            <a href="#">Читать поробнее...</a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-12">-->
-<!--                                <div class="section-title">-->
-<!--                                    <h4 class="btn btn-primary btn-lg btn-block">Читать все новоcти</h4>-->
-<!--                                </div>-->
-<!--                            </div>-->
+
                         </div>
                     </div>
                 </div>
@@ -378,13 +204,14 @@
                             <div class="col-12">
                                 <div class="section-title">
                                     <h4 class="m-0 text-uppercase font-weight-bold">Экономика</h4>
-                                    <a class="text-secondary font-weight-medium text-decoration-none" href="">Смотреть
+                                    <a class="text-secondary font-weight-medium text-decoration-none" href="economic/all">Смотреть
                                         все</a>
                                 </div>
                             </div>
                             <div class="card-group">
                              <div class="row row-cols-1 row-cols-md-3 g-4">
                                  {% for i in newsEconom %}
+                                   <a href="post/{{i.id}}">
                                       <div class="col">
                                         <div class="card h-100">
                                           <img src="{{ i.image.url }}" class="card-img-top" alt="...">
@@ -394,6 +221,7 @@
                                           </div>
                                         </div>
                                       </div>
+                                   </a>
                                  {% endfor %}
                                 </div>
                             </div>
@@ -410,7 +238,7 @@
                             <div class="col-12">
                                 <div class="section-title">
                                     <h4 class="m-0 text-uppercase font-weight-bold">Преступления</h4>
-                                    <a class="text-secondary font-weight-medium text-decoration-none" href="">Смотреть
+                                    <a class="text-secondary font-weight-medium text-decoration-none" href="criminal/all">Смотреть
                                         все</a>
                                 </div>
                             </div>
@@ -419,15 +247,17 @@
                                 <div class="card-group">
                      <div class="row row-cols-1 row-cols-md-3 g-4">
                          {% for i in newsCriminal %}
+                            <a href="post/{{i.id}}">
                               <div class="col">
                                 <div class="card h-100">
                                   <img src="{{ i.image.url }}" class="card-img-top" alt="...">
                                   <div class="card-body">
-                                    <h5 class="card-title">{{ i.title }}</h5>
+                                 <h5 class="card-title">{{ i.title }}</h5>
                                     <p class="card-text">{{ i.description }}</p>
                                   </div>
                                 </div>
                               </div>
+                                </a>
                          {% endfor %}
                     </div>
     </div>
@@ -451,6 +281,7 @@
                                 <div class="card-group">
                      <div class="row row-cols-1 row-cols-md-3 g-4">
                          {% for i in newsSport %}
+                           <a href="post/{{i.id}}">
                               <div class="col">
                                 <div class="card h-100">
                                   <img src="{{ i.image.url }}" class="card-img-top" alt="...">
@@ -460,6 +291,7 @@
                                   </div>
                                 </div>
                               </div>
+                           </a>
                          {% endfor %}
                     </div>
     </div>
@@ -467,7 +299,7 @@
 </div>
                             <div class="col-12">
                                 <div class="section-title">
-                                    <h4 class="btn btn-primary btn-lg btn-block">Читать все новоcти</h4>
+                                    <h4 class="btn btn-primary btn-lg btn-block"><a href="news/all" style="color:black">Читать все новоcти</a></h4>
                                 </div>
                             </div>
                         </div>

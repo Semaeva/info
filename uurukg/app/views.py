@@ -53,6 +53,26 @@ def release_list(request):
     return render(request, 'release.html', {'news': news})
 
 
+def economic_list(request):
+    news = Post.objects.filter(category=2)
+    return render(request, 'econom.html', {'news': news})
+
+
+def criminal_list(request):
+    news = Post.objects.filter(category=1)
+    return render(request, 'crimanal.html', {'news': news})
+
+
+def sport_list(request):
+    news = Post.objects.filter(category=3)
+    return render(request, 'sport.html', {'news': news})
+
+
+def news_list(request):
+    news = Post.objects.all()
+    return render(request, 'all_news.html', {'news': news})
+
+
 #
 # class PostDetailView(HitCountDetailView):
 #     model = Post
