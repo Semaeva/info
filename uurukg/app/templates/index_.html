@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--{% load hitcount_tags %}-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+</head>
+<body>
+
+
+<h2>Категории</h2>
+<div><h3>Топ новостей</h3>
+<table class="table">
+    <tr>
+        <th>Наименование</th>
+        <th>описание</th>
+        <th>Детально</th>
+    </tr>
+    {% if top != 0 %}
+        {% for i in newsTop %}
+            <tr>
+                <td>{{i}}</td>
+                <td>{{i.overview | safe}}</td>
+                <td><a href="{% url 'post' i.title %}">Подробнее</a></td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+</table>
+    <br> <br> <br> <br> <br> <br> <br>
+
+
+<div><h3>Экономика</h3>
+<table class="table">
+    <tr>
+        <th>Новость</th>
+        <th>описание</th>
+    </tr>
+    {% for ec in newsEconom %}
+    <tr>
+        <td>{{ec.title}}</td>
+        <td>{{ec.id}}</td>
+        <td>{{ec.overview | safe}}</td>
+<!--        <td><a href="detail/{{ec.id}}">Подробнее</a></td>-->
+        <td><a href="post/{{ec.id}}">Подробнее</a></td>
+            </tr>
+    {% endfor %}
+</table>
+    <br> <br> <br> <br> <br> <br> <br>
+</div>
+<div><h3>Преступления</h3>
+    <table class="table">
+    <tr>
+        <th>Новость</th>
+        <th>описание</th>
+    </tr>
+    {% for cr in newsCriminal %}
+    <tr>
+        <td>{{cr.title}}</td>
+        <td>{{cr.overview | safe}}</td>
+<!--        <td><a href="detail/{{cr.id}}">Подробнее</a></td>-->
+          <td><a href="post/{{cr.id}}/">Подробнее</a></td>
+            </tr>
+    {% endfor %}
+</table>
+</div>
+ <br> <br> <br> <br> <br> <br>
+<div><h3>Спорт</h3>
+<table class="table">
+    <tr>
+        <th>Новость</th>
+        <th>описание</th>
+    </tr>
+    {% for n in newsSport %}
+    <tr>
+        <td>{{n.title}}</td>
+         <td>{{n.overview | safe}}</td>
+<!--        <td><a href="detail/{{n.id}}">Подробнее</a></td>-->
+        <td><a href="post/{{n.id}}/">Подробнее</a></td>
+            </tr>
+    {% endfor %}
+</table>
+     <br> <br> <br> <br>
+</div>
+
+<div id="search">
+      <form action="search/" method="post">
+         {% csrf_token %}
+        <fieldset>
+          <legend>Веедите инициалы</legend>
+          <p>Введите инициалы</p>
+          <input type="text" name ="name"   onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;" />
+        <p>Введите должность</p>
+          <input type="text" name ="position"  onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;" />
+          <input type="submit" name="go" id="go" value="Search" />
+        </fieldset>
+      </form>
+    </div>
+
+</body>
+</html>

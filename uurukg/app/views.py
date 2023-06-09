@@ -29,11 +29,11 @@ def list_top_news():
 
 
 def posts(request):
-    posts = Post.objects.all()
-    newsEcnom = Post.objects.filter(category=2).all()[:1]
-    newsSport = Post.objects.filter(category=3).all()[:1]
-    newsCriminal = Post.objects.filter(category=1).all()[:1]
-    newsTop = Post.objects.filter(top_news=True).all()[:4]
+    posts = Post.objects.all()[:6]
+    newsEcnom = Post.objects.filter(category=2).all()[:3]
+    newsSport = Post.objects.filter(category=3).all()[:3]
+    newsCriminal = Post.objects.filter(category=1).all()[:3]
+    newsTop = Post.objects.filter(top_news=True).all()[:3]
     return render(request, "index.html", {'posts': posts,
                                          'newsEconom': newsEcnom,
                                          'newsSport': newsSport,
@@ -71,7 +71,7 @@ def release_list(request):
 #     newsEcnom = News.objects.filter(category= 1 ).all()
 #     newsSport = News.objects.filter(category= 3 ).all()
 #     newsCriminal = News.objects.filter(category= 2 ).all()
-#     return render(request, 'index.html', {'news': news,
+#     return render(request, 'index_.html', {'news': news,
 #                                           'newsImg':newsImg,
 #                                           'newsEcnom':newsEcnom,
 #                                           'newsCriminal': newsCriminal,

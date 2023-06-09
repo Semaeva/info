@@ -1,100 +1,504 @@
 <!DOCTYPE html>
-<!--{% load hitcount_tags %}-->
+{% load static %}
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Главная</title>
+    <meta charset="utf-8">
+    <title>Уруу KG</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{%static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{%static 'css/style.css' %}" rel="stylesheet">
 </head>
+
 <body>
-
-
-<h2>Категории</h2>
-<div><h3>Топ новостей</h3>
-<table class="table">
-    <tr>
-        <th>Наименование</th>
-        <th>описание</th>
-        <th>Детально</th>
-    </tr>
-    {% if top != 0 %}
-        {% for i in newsTop %}
-            <tr>
-                <td>{{i}}</td>
-                <td>{{i.overview | safe}}</td>
-                <td><a href="{% url 'post' i.title %}">Подробнее</a></td>
-            </tr>
-        {% endfor %}
-    {% endif %}
-</table>
-    <br> <br> <br> <br> <br> <br> <br>
-
-
-<div><h3>Экономика</h3>
-<table class="table">
-    <tr>
-        <th>Новость</th>
-        <th>описание</th>
-    </tr>
-    {% for ec in newsEconom %}
-    <tr>
-        <td>{{ec.title}}</td>
-        <td>{{ec.id}}</td>
-        <td>{{ec.overview | safe}}</td>
-<!--        <td><a href="detail/{{ec.id}}">Подробнее</a></td>-->
-        <td><a href="post/{{ec.id}}">Подробнее</a></td>
-            </tr>
-    {% endfor %}
-</table>
-    <br> <br> <br> <br> <br> <br> <br>
-</div>
-<div><h3>Преступления</h3>
-    <table class="table">
-    <tr>
-        <th>Новость</th>
-        <th>описание</th>
-    </tr>
-    {% for cr in newsCriminal %}
-    <tr>
-        <td>{{cr.title}}</td>
-        <td>{{cr.overview | safe}}</td>
-<!--        <td><a href="detail/{{cr.id}}">Подробнее</a></td>-->
-          <td><a href="post/{{cr.id}}/">Подробнее</a></td>
-            </tr>
-    {% endfor %}
-</table>
-</div>
- <br> <br> <br> <br> <br> <br>
-<div><h3>Спорт</h3>
-<table class="table">
-    <tr>
-        <th>Новость</th>
-        <th>описание</th>
-    </tr>
-    {% for n in newsSport %}
-    <tr>
-        <td>{{n.title}}</td>
-         <td>{{n.overview | safe}}</td>
-<!--        <td><a href="detail/{{n.id}}">Подробнее</a></td>-->
-        <td><a href="post/{{n.id}}/">Подробнее</a></td>
-            </tr>
-    {% endfor %}
-</table>
-     <br> <br> <br> <br>
-</div>
-
-<div id="search">
-      <form action="search/" method="post">
-         {% csrf_token %}
-        <fieldset>
-          <legend>Веедите инициалы</legend>
-          <p>Введите инициалы</p>
-          <input type="text" name ="name"   onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;" />
-        <p>Введите должность</p>
-          <input type="text" name ="position"  onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;" />
-          <input type="submit" name="go" id="go" value="Search" />
-        </fieldset>
-      </form>
+<!-- Topbar Start -->
+<div class="container-fluid d-none d-lg-block">
+    <div class="row align-items-center bg-dark px-lg-5">
+        <div class="col-lg-9">
+            <nav class="navbar navbar-expand-sm bg-dark p-0">
+                <ul class="navbar-nav ml-n2">
+                    <li class="nav-item border-right border-secondary">
+                        <a class="nav-link text-body small" href="#">Четверг, 8 июня 2023 </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
+    <div class="row align-items-center bg-white py-3 px-lg-5">
+        <div class="col-lg-4">
+            <a href="index.html" class="navbar-brand p-0 d-none d-lg-block">
+                <h1 class="m-0 display-4 text-uppercase text-primary">УРУУ<span
+                        class="text-secondary font-weight-normal">KG</span></h1>
+            </a>
+        </div>
+        <div class="col-lg-8 text-center text-lg-right">
+            <a href="https://htmlcodex.com"><img class="img-fluid" src="img/ads-728x90.png" alt=""></a>
+        </div>
+    </div>
+</div>
+<!-- Topbar End -->
 
+
+<!-- Navbar Start -->
+<div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-0 py-lg-0 px-lg-5">
+        <a href="index.html" class="navbar-brand d-block d-lg-none">
+            <h1 class="m-0 display-4 text-uppercase text-primary">УРУУ<span
+                    class="text-white font-weight-normal">.KG</span></h1>
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
+            <div class="navbar-nav mr-auto py-0">
+                <a href="index.html" class="nav-item nav-link active">Главная</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Новости</a>
+                    <div class="dropdown-menu rounded-0 m-0">
+                        <a href="#" class="dropdown-item">Новости СНГ</a>
+                        <a href="#" class="dropdown-item">Экономика</a>
+                        <a href="#" class="dropdown-item">Спорт</a>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">События</a>
+                    <div class="dropdown-menu rounded-0 m-0">
+                        <a href="#" class="dropdown-item">Коррупция</a>
+                        <a href="#" class="dropdown-item">ОПГ</a>
+                        <a href="#" class="dropdown-item">Преступления</a>
+                    </div>
+                </div>
+<!--                <div class="nav-item dropdown">-->
+<!--                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Пресс-релизы</a>-->
+<!--                    <div class="dropdown-menu rounded-0 m-0">-->
+<!--                        <a href="#" class="dropdown-item">ГКНБ</a>-->
+<!--                        <a href="#" class="dropdown-item">Прокуратура</a>-->
+<!--                        <a href="#" class="dropdown-item">МВД</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <a href="category.html" class="nav-item nav-link">Коррупционеры и ОПГ</a>-->
+                <a href="category.html" class="nav-item nav-link">Репортер</a>
+                <a href="single.html" class="nav-item nav-link">Аналитика</a>
+            </div>
+            <div class="input-group ml-auto d-none d-lg-flex" style="width: 100%; max-width: 300px;">
+                <input type="text" class="form-control border-0" placeholder="Поиск...">
+                <div class="input-group-append">
+                    <button class="input-group-text bg-primary text-dark border-0 px-3"><i
+                            class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- Navbar End -->
+
+
+<!-- Main News Slider Start -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-7 px-0">
+            <div class="owl-carousel main-carousel position-relative">
+                {% for i in top%}
+                <div class="position-relative overflow-hidden" style="height: 500px;">
+<!--                    <img class="img-fluid h-100" src="{% static 'img/news-800x500-1.jpg' %}" style="object-fit: cover;">-->
+                    <img class="img-fluid h-100" src="{{ i.image.url }}" style="object-fit: cover;">
+                    <div class="overlay">
+                        <div class="mb-2">
+                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                               href="">{{i.title}}</a>
+                            <a class="text-white" href="">{{i.created_date}}</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-lg-5 border border-warning findClass backgroundFind">
+            <div class="row mx-5">
+                <div class="row px-5 mt-5 pb-5">
+                    <form action="blog/search/" method="post">
+                        {% csrf_token %}
+                        <fieldset>
+<!--                            <legend>Кого найти?</legend>-->
+                            <legend>Коррупционеры и ОПГ</legend>
+                            <p>Поиск по ФИО:</p>
+                            <input type="text" name="name" placeholder="Инициалы..."
+                                   onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>
+                            <p class="mt-5">Поиск по должности:</p>
+                            <input type="text" name="position" placeholder="Должность..."
+                                   onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>
+                            <input type="submit" class="mt-0" name="go" id="go" value="Поиск..."/>
+                        </fieldset>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-title">
+                                    <h4 class="m-0 text-uppercase font-weight-bold">Последние новости</h4>
+                                    <a class="text-secondary font-weight-medium text-decoration-none" href="">Смотреть
+                                        все</a>
+                                </div>
+                            </div>
+ {% for i in posts %}
+                            <div class="col-lg-6">
+
+                                <div class="position-relative mb-3">
+                                    <img class="img-fluid w-100" src="{{ i.image.url }}"
+                                         style="object-fit: cover;">
+                                    <div class="bg-white border border-top-0 p-4">
+                                        <div class="mb-2">
+                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                                               href="">{{ i.category.title }}</a>
+                                            <a class="text-body" href=""><small>{{ i.created_date }}</small></a>
+                                        </div>
+                                        <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"
+                                           href="">{{ i.title }}</a>
+                                        <p class="m-0">{{ i.description }}</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
+                                        <div class="d-flex align-items-center">
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <a href="#">Читать поробнее...</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                               {% endfor %}
+<!--                            <div class="col-lg-6">-->
+<!--                                <div class="position-relative mb-3">-->
+<!--                                    <img class="img-fluid w-100" src="img/news-700x435-1.jpg"-->
+<!--                                         style="object-fit: cover;">-->
+<!--                                    <div class="bg-white border border-top-0 p-4">-->
+<!--                                        <div class="mb-2">-->
+<!--                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"-->
+<!--                                               href="">Экономика</a>-->
+<!--                                            <a class="text-body" href=""><small>8 июля 2023</small></a>-->
+<!--                                        </div>-->
+<!--                                        <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"-->
+<!--                                           href="">Lorem ipsum dolor sit amet elit...</a>-->
+<!--                                        <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna-->
+<!--                                            rebum clita rebum dolor stet amet justo</p>-->
+<!--                                    </div>-->
+<!--                                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">-->
+<!--                                        <div class="d-flex align-items-center">-->
+<!--                                        </div>-->
+<!--                                        <div class="d-flex align-items-center">-->
+<!--                                            <a href="#">Читать поробнее...</a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-12 mb-3">-->
+<!--                                <a href=""><img class="img-fluid w-100" src="img/ads-728x90.png" alt=""></a>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-6">-->
+<!--                                <div class="position-relative mb-3">-->
+<!--                                    <img class="img-fluid w-100" src="img/news-700x435-1.jpg"-->
+<!--                                         style="object-fit: cover;">-->
+<!--                                    <div class="bg-white border border-top-0 p-4">-->
+<!--                                        <div class="mb-2">-->
+<!--                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"-->
+<!--                                               href="">Спорт</a>-->
+<!--                                            <a class="text-body" href=""><small>8 июля 2023</small></a>-->
+<!--                                        </div>-->
+<!--                                        <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"-->
+<!--                                           href="">Lorem ipsum dolor sit amet elit...</a>-->
+<!--                                        <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna-->
+<!--                                            rebum clita rebum dolor stet amet justo</p>-->
+<!--                                    </div>-->
+<!--                                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">-->
+<!--                                        <div class="d-flex align-items-center">-->
+<!--                                        </div>-->
+<!--                                        <div class="d-flex align-items-center">-->
+<!--                                            <a href="#">Читать поробнее...</a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-6">-->
+<!--                                <div class="position-relative mb-3">-->
+<!--                                    <img class="img-fluid w-100" src="img/news-700x435-1.jpg"-->
+<!--                                         style="object-fit: cover;">-->
+<!--                                    <div class="bg-white border border-top-0 p-4">-->
+<!--                                        <div class="mb-2">-->
+<!--                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"-->
+<!--                                               href="">Преступления</a>-->
+<!--                                            <a class="text-body" href=""><small>8 июля 2023</small></a>-->
+<!--                                        </div>-->
+<!--                                        <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"-->
+<!--                                           href="">Lorem ipsum dolor sit amet elit...</a>-->
+<!--                                        <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna-->
+<!--                                            rebum clita rebum dolor stet amet justo</p>-->
+<!--                                    </div>-->
+<!--                                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">-->
+<!--                                        <div class="d-flex align-items-center">-->
+<!--                                        </div>-->
+<!--                                        <div class="d-flex align-items-center">-->
+<!--                                            <a href="#">Читать поробнее...</a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-6">-->
+<!--                                <div class="position-relative mb-3">-->
+<!--                                    <img class="img-fluid w-100" src="img/news-700x435-1.jpg"-->
+<!--                                         style="object-fit: cover;">-->
+<!--                                    <div class="bg-white border border-top-0 p-4">-->
+<!--                                        <div class="mb-2">-->
+<!--                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"-->
+<!--                                               href="">Экономика</a>-->
+<!--                                            <a class="text-body" href=""><small>8 июля 2023</small></a>-->
+<!--                                        </div>-->
+<!--                                        <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"-->
+<!--                                           href="">Lorem ipsum dolor sit amet elit...</a>-->
+<!--                                        <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna-->
+<!--                                            rebum clita rebum dolor stet amet justo</p>-->
+<!--                                    </div>-->
+<!--                                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">-->
+<!--                                        <div class="d-flex align-items-center">-->
+<!--                                        </div>-->
+<!--                                        <div class="d-flex align-items-center">-->
+<!--                                            <a href="#">Читать поробнее...</a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-6">-->
+<!--                                <div class="position-relative mb-3">-->
+<!--                                    <img class="img-fluid w-100" src="img/news-700x435-1.jpg"-->
+<!--                                         style="object-fit: cover;">-->
+<!--                                    <div class="bg-white border border-top-0 p-4">-->
+<!--                                        <div class="mb-2">-->
+<!--                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"-->
+<!--                                               href="">Преступления</a>-->
+<!--                                            <a class="text-body" href=""><small>8 июля 2023</small></a>-->
+<!--                                        </div>-->
+<!--                                        <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"-->
+<!--                                           href="">Lorem ipsum dolor sit amet elit...</a>-->
+<!--                                        <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna-->
+<!--                                            rebum clita rebum dolor stet amet justo</p>-->
+<!--                                    </div>-->
+<!--                                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">-->
+<!--                                        <div class="d-flex align-items-center">-->
+<!--                                        </div>-->
+<!--                                        <div class="d-flex align-items-center">-->
+<!--                                            <a href="#">Читать поробнее...</a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-6">-->
+<!--                                <div class="position-relative mb-3">-->
+<!--                                    <img class="img-fluid w-100" src="img/news-700x435-1.jpg"-->
+<!--                                         style="object-fit: cover;">-->
+<!--                                    <div class="bg-white border border-top-0 p-4">-->
+<!--                                        <div class="mb-2">-->
+<!--                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"-->
+<!--                                               href="">Преступления</a>-->
+<!--                                            <a class="text-body" href=""><small>8 июля 2023</small></a>-->
+<!--                                        </div>-->
+<!--                                        <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"-->
+<!--                                           href="">Lorem ipsum dolor sit amet elit...</a>-->
+<!--                                        <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna-->
+<!--                                            rebum clita rebum dolor stet amet justo</p>-->
+<!--                                    </div>-->
+<!--                                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">-->
+<!--                                        <div class="d-flex align-items-center">-->
+<!--                                        </div>-->
+<!--                                        <div class="d-flex align-items-center">-->
+<!--                                            <a href="#">Читать поробнее...</a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-6">-->
+<!--                                <div class="position-relative mb-3">-->
+<!--                                    <img class="img-fluid w-100" src="{% static 'img/news-700x435-1.jpg' %}"-->
+<!--                                         style="object-fit: cover;">-->
+<!--                                    <div class="bg-white border border-top-0 p-4">-->
+<!--                                        <div class="mb-2">-->
+<!--                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"-->
+<!--                                               href="">Преступления</a>-->
+<!--                                            <a class="text-body" href=""><small>8 июля 2023</small></a>-->
+<!--                                        </div>-->
+<!--                                        <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"-->
+<!--                                           href="">Lorem ipsum dolor sit amet elit...</a>-->
+<!--                                        <p class="m-0">Dolor lorem eos dolor duo et eirmod sea. Dolor sit magna-->
+<!--                                            rebum clita rebum dolor stet amet justo</p>-->
+<!--                                    </div>-->
+<!--                                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">-->
+<!--                                        <div class="d-flex align-items-center">-->
+<!--                                        </div>-->
+<!--                                        <div class="d-flex align-items-center">-->
+<!--                                            <a href="#">Читать поробнее...</a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-12">-->
+<!--                                <div class="section-title">-->
+<!--                                    <h4 class="btn btn-primary btn-lg btn-block">Читать все новоcти</h4>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-title">
+                                    <h4 class="m-0 text-uppercase font-weight-bold">Экономика</h4>
+                                    <a class="text-secondary font-weight-medium text-decoration-none" href="">Смотреть
+                                        все</a>
+                                </div>
+                            </div>
+                            <div class="card-group">
+                             <div class="row row-cols-1 row-cols-md-3 g-4">
+                                 {% for i in newsEconom %}
+                                      <div class="col">
+                                        <div class="card h-100">
+                                          <img src="{{ i.image.url }}" class="card-img-top" alt="...">
+                                          <div class="card-body">
+                                            <h5 class="card-title">{{ i.title }}</h5>
+                                            <p class="card-text">{{ i.description }}</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                 {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                                <div class="container-fluid pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-title">
+                                    <h4 class="m-0 text-uppercase font-weight-bold">Преступления</h4>
+                                    <a class="text-secondary font-weight-medium text-decoration-none" href="">Смотреть
+                                        все</a>
+                                </div>
+                            </div>
+
+
+                                <div class="card-group">
+                     <div class="row row-cols-1 row-cols-md-3 g-4">
+                         {% for i in newsCriminal %}
+                              <div class="col">
+                                <div class="card h-100">
+                                  <img src="{{ i.image.url }}" class="card-img-top" alt="...">
+                                  <div class="card-body">
+                                    <h5 class="card-title">{{ i.title }}</h5>
+                                    <p class="card-text">{{ i.description }}</p>
+                                  </div>
+                                </div>
+                              </div>
+                         {% endfor %}
+                    </div>
+    </div>
+                    </div>
+</div>
+
+                          <div class="container-fluid pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-title">
+                                    <h4 class="m-0 text-uppercase font-weight-bold">Спорт</h4>
+                                    <a class="text-secondary font-weight-medium text-decoration-none" href="">Смотреть
+                                        все</a>
+                                </div>
+                            </div>
+
+
+                                <div class="card-group">
+                     <div class="row row-cols-1 row-cols-md-3 g-4">
+                         {% for i in newsSport %}
+                              <div class="col">
+                                <div class="card h-100">
+                                  <img src="{{ i.image.url }}" class="card-img-top" alt="...">
+                                  <div class="card-body">
+                                    <h5 class="card-title">{{ i.title }}</h5>
+                                    <p class="card-text">{{ i.description }}</p>
+                                  </div>
+                                </div>
+                              </div>
+                         {% endfor %}
+                    </div>
+    </div>
+                    </div>
+</div>
+                            <div class="col-12">
+                                <div class="section-title">
+                                    <h4 class="btn btn-primary btn-lg btn-block">Читать все новоcти</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                        <!-- Popular News End -->
+                        <!-- Footer Start -->
+                        <div class="container-fluid py-4 px-sm-3 px-md-5" style="background: #111111;">
+                            <p class="m-0 text-center">&copy; <a href="#">УРУУ.KG</a> Все права защищены.
+                        </div>
+                        <!-- Footer End -->
+                        <!-- Back to Top -->
+                        <a href="#" class="btn btn-primary btn-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+                        <!-- JavaScript Libraries -->
+                        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+                        <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+                        <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+                        <!-- Template Javascript -->
+                        <script src="{% static 'js/main.js' %}"></script>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 </body>
 </html>
