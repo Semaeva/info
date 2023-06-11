@@ -15,8 +15,9 @@ urlpatterns = [
     path('korrupcia/all', korrupcia_list),
     path('opg/all', opg_list),
     path('sng/all', sng_list),
-    path('analitika/all', analitika_list, name= 'analitika'),
+    path('analitika/all', analitika_list),
     path('post/<int:pk>/', PostDetailView.as_view(), name='posts-detail'),
+    # path('news/post/<int:pk>/', PostDetailView.as_view(), name='posts-detail'),
     path('release/all/', release_list),
 
 

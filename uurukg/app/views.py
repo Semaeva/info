@@ -79,6 +79,7 @@ def repoter_list(request):
     news = Post.objects.filter(category=7)
     return render(request, 'reporter.html', {'news': news})
 
+
 def analitika_list(request):
     news = Post.objects.filter(category=4)
     return render(request, 'analitika.html', {'news': news})

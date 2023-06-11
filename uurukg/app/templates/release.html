@@ -1,12 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{% for i in news %}
-{{i.title}}
-{% endfor %}
-</body>
-</html>
+{% extends 'base.html' %}
+{% block page_content %}
+
+{% load static %}
+<h2>Пресс-релизы</h2>
+
+
+<div class="row text-dark">
+       {% for item in news %}
+      <div class="col-md-3">
+          <div class="card-deck">
+        <div class="card">
+              <img src="{{ item.image.url }}" class="card-img-top" alt="...">
+          <a href="">{{ item.departments.title }}</a>
+            <div class="card-body">
+                <h5 class="card-title">{{ с.title }}</h5>
+                <p class="card-text">{{ item.description }}</p>
+            </div>
+             <div class="card-footer">
+      <small class="text-muted"><p class="card-text">{{ item.created_date }}</p></small>
+    </div>
+        </div>
+    </div>
+          {% endfor %}
+      </div>
+</div>
+     {% endblock %}

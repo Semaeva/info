@@ -145,8 +145,8 @@ class Country(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = "Новости СНГ"
-        verbose_name_plural = "Новости СНГ"
+        verbose_name = "Страны СНГ"
+        verbose_name_plural = "Страны СНГ"
 
 
 class Govno(models.Model):
