@@ -40,13 +40,30 @@ def posts(request):
                                          'newsSport': newsSport,
                                          'newsCriminal': newsCriminal,
                                          'top': newsTop,
-                                          'sng':sng
+                                          'sng': sng
                                        })
 
 
 class PostDetailView(HitCountDetailView):
     model = Post
     template_name = 'detail.html'
+    count_hit = True
+
+
+class SngDetailView(HitCountDetailView):
+    model = NewsSNG
+    template_name = 'sng_detail.html'
+    count_hit = True
+
+
+class ReleaseDetailView(HitCountDetailView):
+    model = Press_release
+    template_name = 'release_detail.html'
+    count_hit = True
+
+class GovnoDetailView(HitCountDetailView):
+    model = Govno
+    template_name = 'dopinfo.html'
     count_hit = True
 
 
@@ -67,7 +84,7 @@ def sng_list(request):
 
 def criminal_list(request):
     news = Post.objects.filter(category=1)
-    return render(request, 'crimanal.html', {'news': news})
+    return render(request, 'criminal.html', {'news': news})
 
 
 def sport_list(request):

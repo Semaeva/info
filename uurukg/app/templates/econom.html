@@ -1,26 +1,28 @@
-<!DOCTYPE html>
+
+{% extends 'base.html' %}
+{% block page_content %}
+
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Новости экономики</title>
-</head>
-<body>
-<table class="table">
-    <tr>
-        <th>title</th>
-        <th>описание</th>
-        <th>дата создания</th>
-    </tr>
-    {% for i in news %}
-    <tr>
-        <td>{{i.title}}</td>
-        <td>{{i.decription}}</td>
-        <td>{{i.created_date}}</td>
-    </tr>
-    {% endfor %}
-</table>
+<h2>Экономика</h2>
 
 
-</body>
-</html>
+<div class="row text-dark">
+       {% for item in news %}
+      <div class="col-md-3">
+          <div class="card-deck">
+        <div class="card">
+              <img src="{{ item.image.url }}" class="card-img-top" alt="...">
+          <a href="">{{ item.category.title }}</a>
+            <div class="card-body">
+                <h5 class="card-title">{{ с.title }}</h5>
+                <p class="card-text">{{ item.description }}</p>
+            </div>
+             <div class="card-footer">
+      <small class="text-muted"><p class="card-text">{{ item.created_date }}</p></small>
+    </div>
+        </div>
+    </div>
+          {% endfor %}
+      </div>
+</div>
+     {% endblock %}

@@ -32,17 +32,6 @@ class Post(models.Model, HitCountMixin):
         verbose_name_plural = "Новости"
 
 
-class PostDetailView(HitCountDetailView):
-    model = Post
-    template_name = 'detail.html'
-    # slug_field = "slug"
-    count_hit = True
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['hit_count'] = self.object.hit_count.hits
-        return context
-
 
 class Press_release(models.Model):
     title = models.CharField(max_length=225)
@@ -127,6 +116,7 @@ class Category(models.Model):
         verbose_name_plural = "Категория"
 
 
+
 class Department(models.Model):
     title = models.CharField(max_length=200)
 
@@ -149,7 +139,7 @@ class Country(models.Model):
         verbose_name_plural = "Страны СНГ"
 
 
-class Govno(models.Model):
+class Govno(models.Model, HitCountMixin):
     name = models.CharField('ФИО', max_length=253, default='', blank=False, null=False)
     birth = models.DateField(default=datetime.today)
     position = models.CharField(max_length=253, default='неизвестно')
@@ -175,12 +165,23 @@ class GovnoImage(models.Model):
     govno = models.ForeignKey(Govno, on_delete=models.CASCADE, blank=True, null=True, related_name='govnoImage')
 
     def __str__(self):
-        return f'название:{self.govno.title}'
+        return f'название:{self.govno.name}'
 
     class Meta:
         verbose_name = "Галерея Дополнительной информации"
         verbose_name_plural = "Галерея Дополнительной информации"
 
+
+# class GovnoDetailView(HitCountDetailView):
+#     model = Post
+#     template_name = 'dopinfo.html'
+#     # slug_field = "slug"
+#     count_hit = True
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['hit_count'] = self.object.hit_count.hits
+#         return context
 
 # class PageView(models.Model):
 #     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)

@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% block page_content %}
-
+{% load embed_video_tags %}
 {% load static %}
 <h2>Все новости</h2>
 
 <div class="row text-dark">
        {% for item in news %}
+     <a href="/post/{{item.id}}">
       <div class="col-md-4">
           <div class="card-deck">
         <div class="card">
@@ -17,17 +18,12 @@
             </div>
              <div class="card-footer">
                  <small class="text-muted">{{ item.created_date }}</small>
-<!--                    <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold" href="/post/{{item.id}}">{{ item.title }}</a>-->
             </div>
         </div>
     </div>
-      </div>
+      </div></a>
 {% endfor %}
 </div>
-
-
-<!--<p>{{i.title}}</p>-->
-<!--<br><br><br><br><br><br><br><br><br><br>-->
 
 
      {% endblock %}

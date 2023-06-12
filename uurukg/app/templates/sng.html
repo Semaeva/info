@@ -1,8 +1,26 @@
 {% extends 'base.html' %}
-{% load static %}
-
-
 {% block page_content %}
-<p>Новости СНГ</p>
+{% load embed_video_tags %}
+{% load static %}
+<h2>Новости СНГ</h2>
 
-{% endblock %}
+
+<div class="list-group">
+    {% for item in news %}
+
+<a href="/sng/{{item.id}}" class="list-group-item list-group-item-action">
+    <div class="media">
+      <img src="{{ item.image.url }}" class="mr-3" alt="Изображение новости 1" width="200px">
+      <div class="media-body">
+        <h5 class="mt-0 text-center">{{ item.title }}</h5>
+        <p class="mb-1">{{ item.description }}</p>
+        <small>{{ item.created_date }}</small>
+      </div>
+    </div>
+  </a>
+
+ {% endfor %}
+</div>
+
+
+     {% endblock %}

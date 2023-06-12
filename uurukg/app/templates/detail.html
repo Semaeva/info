@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block page_content %}
+{% load embed_video_tags %}
+{% load static %}
+<h2 class="text-center">{{ post.title }}</h2>
+<div class="row mx-5">
+   <div class="text-dark"> {{ post.overview | safe }}</div>
+    <img src="{{ post.image.url }}" class="img-fluid rounded-start" style="width: 400px;">
+</div>
+</div>
 
-{{post}}
-</body>
-</html>
+{% endblock %}
