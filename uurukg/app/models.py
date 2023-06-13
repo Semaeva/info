@@ -172,23 +172,10 @@ class GovnoImage(models.Model):
         verbose_name_plural = "Галерея Дополнительной информации"
 
 
-# class GovnoDetailView(HitCountDetailView):
-#     model = Post
-#     template_name = 'dopinfo.html'
-#     # slug_field = "slug"
-#     count_hit = True
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['hit_count'] = self.object.hit_count.hits
-#         return context
+class AnonymousUserCount(models.Model, HitCountMixin):
+    ip_address = models.GenericIPAddressField(unique=True)
 
-# class PageView(models.Model):
-#     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-#     object_id = models.CharField(max_length=255)
-#     content_object = GenericForeignKey('content_type', 'object_id')
-#     timestamp = models.DateTimeField(auto_now_add=True)
-#
-#     def __str__(self):
-#         return f'{self.content_object} - {self.timestamp}'
-#113
+    hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk',
+                                        related_query_name='hit_count_generic_relation')
+    created_date = models.DateTimeField(auto_now=True)
+

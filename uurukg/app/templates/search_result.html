@@ -7,31 +7,37 @@
 {% if person %}
 
 
-{% for i in person %}
-<a href="/dopinfo/{{i.id}}">
-<div class="card mb-3" style="max-width: 540px;">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src="{{ i.image.url }}" class="img-fluid rounded-start" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <a href="/dopinfo/{{i.id}}"> <h5 class="card-title">{{i.name}}</h5></a>
-        <p class="card-text"> {{i.position}}</p>
-<!--        <p class="card-text"> {{i.position}}</p>-->
-<!--        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+
+{% for item in person %}
+<a href="/post/{{item.id}}" class="list-group-item list-group-item-action">
+    <div class="media">
+      <img src="{{ item.image.url }}" class="mr-3" alt="Изображение новости 1" width="200px">
+      <div class="media-body">
+          <h6 class="mt-0 text-left text-warning">{{ item.name }}</h6>
+
+        <h4 class="mt-0 text-left">{{ item.birth }}</h4>
+        <p class="mb-1">{{ item.department }}</p>
+<!--        <small>{{ item.criminal_record }}</small>-->
       </div>
     </div>
-  </div>
-</div>
-</a>
-
-
-
-<!--<p>{{i.name}}</p>-->
-<!--<p>{{i.position}}</p>-->
-<!--<p>{{i.resume}}</p>-->
-<!--<p>{{i.dop_info}}</p>-->
+  </a>
+<!--<a href="/dopinfo/{{i.id}}">-->
+<!--<div class="card mb-3" style="max-width: 540px;">-->
+<!--  <div class="row g-0">-->
+<!--    <div class="col-md-4">-->
+<!--      <img src="{{ i.image.url }}" class="img-fluid rounded-start" alt="...">-->
+<!--    </div>-->
+<!--    <div class="col-md-8">-->
+<!--      <div class="card-body">-->
+<!--        <a href="/dopinfo/{{i.id}}"> <h5 class="card-title">{{i.name}}</h5></a>-->
+<!--        <p class="card-text"> {{i.position}}</p>-->
+<!--&lt;!&ndash;        <p class="card-text"> {{i.position}}</p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>&ndash;&gt;-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--</a>-->
 {% endfor %}
 {% else %}
 <p>Пользователей не найдено</p>

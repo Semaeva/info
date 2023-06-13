@@ -1,8 +1,12 @@
+from datetime import timedelta
+
 import hitcount.models
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.crypto import get_random_string
 from hitcount.models import Hit
 from django.core.paginator import Paginator, Page
+
 from .models import *
 from django.db.models import Q
 from fuzzywuzzy import fuzz
@@ -28,6 +32,19 @@ def list_top_news():
         return 0
 
 
+def recent_record():
+    current_time = datetime.now()
+    half_hour_ago = current_time - timedelta(minutes=30)
+    recent_records = AnonymousUserCount.objects.filter(created_date__gte=half_hour_ago).count()
+    return recent_records
+
+
+def get_connections(ip):
+    anonymous_user_count, created = AnonymousUserCount.objects.get_or_create(ip_address=ip)
+    anonymous_user_count.session_key = get_random_string(32)
+    anonymous_user_count.save()
+
+
 def posts(request):
     posts = Post.objects.all()[:6]
     newsEcnom = Post.objects.filter(category=2).all()[:3]
@@ -35,12 +52,14 @@ def posts(request):
     newsCriminal = Post.objects.filter(category=1).all()[:3]
     newsTop = Post.objects.filter(top_news=True).all()[:3]
     sng = NewsSNG.objects.all()[:3]
+    get_connections(request.META.get('REMOTE_ADDR'))
     return render(request, "index.html", {'posts': posts,
-                                         'newsEconom': newsEcnom,
-                                         'newsSport': newsSport,
-                                         'newsCriminal': newsCriminal,
-                                         'top': newsTop,
-                                          'sng': sng
+                                          'newsEconom': newsEcnom,
+                                          'newsSport': newsSport,
+                                          'newsCriminal': newsCriminal,
+                                          'top': newsTop,
+                                          'sng': sng,
+                                          'anonym': recent_record()
                                        })
 
 
@@ -103,9 +122,12 @@ def analitika_list(request):
     return render(request, 'analitika.html', {'news': news})
 
 
-def news_list(request):
+def news_list(request, page_number=1):
     news = Post.objects.all()
-    return render(request, 'all_news.html', {'news': news})
+    paginated  = Paginator(news, 9)
+    page_number = request.GET.get('page')
+    page = paginated.get_page(page_number)
+    return render(request, 'all_news.html', {'news': page })
 
 
 def opg_list(request):
@@ -116,7 +138,6 @@ def opg_list(request):
 def korrupcia_list(request):
     news = Post.objects.filter(category=5)
     return render(request, 'korrupcia.html', {'news': news})
-
 
 
 def search(request):
@@ -142,6 +163,20 @@ def search(request):
             return render(request, 'search_result.html', {'person': persons})
     else:
         return render(request, 'search_result.html', {'person': 0})
+
+
+def count_anonim(request):
+    print(f'запрос {request}')
+    return render(request, 'index_.html', {'test':0})
+    # ip_address = request.META.get('REMOTE_ADDR')
+    # print(f'Ip address {ip_address}')
+    # anonymous_user_count, created = AnonymousUserCount.objects.get_or_create(ip_address=ip_address)
+    # anonymous_user_count.session_key = get_random_string(32)
+    # anonymous_user_count.save()
+    #
+    # HitCountMixin.hit_count(request, anonymous_user_count)
+
+    # return render(request, 'count.html', {'anonymous_user_count': anonymous_user_count})
 
 
 

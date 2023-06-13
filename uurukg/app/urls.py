@@ -5,8 +5,7 @@ from .views import *
 urlpatterns = [
     path('', posts),
     path('blog/search/', search),
-    #
-    # path('detail/<int:id>', news_detail),
+
     path('economic/all', economic_list),
     path('news/all', news_list),
     path('sport/all', sport_list),
@@ -22,7 +21,11 @@ urlpatterns = [
     path('release/<int:pk>/', ReleaseDetailView.as_view(), name='realese-detail'),
     # path('news/post/<int:pk>/', PostDetailView.as_view(), name='posts-detail'),
     path('release/all/', release_list),
-    
+
+
+
+    # path('', count_anonim),
+
 
 
 ]

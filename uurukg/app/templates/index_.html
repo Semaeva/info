@@ -1,100 +1,247 @@
-<!DOCTYPE html>
-<!--{% load hitcount_tags %}-->
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Главная</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block page_content %}
 
 
-<h2>Категории</h2>
-<div><h3>Топ новостей</h3>
-<table class="table">
-    <tr>
-        <th>Наименование</th>
-        <th>описание</th>
-        <th>Детально</th>
-    </tr>
-    {% if top != 0 %}
-        {% for i in newsTop %}
-            <tr>
-                <td>{{i}}</td>
-                <td>{{i.overview | safe}}</td>
-                <td><a href="{% url 'post' i.title %}">Подробнее</a></td>
-            </tr>
-        {% endfor %}
-    {% endif %}
-</table>
-    <br> <br> <br> <br> <br> <br> <br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-7 px-0">
+            <div class="owl-carousel main-carousel position-relative">
+                {% for i in top %}
+                <div class="position-relative overflow-hidden" style="height: 500px;">
+<!--                    <img class="img-fluid h-100" src="{% static 'img/news-800x500-1.jpg' %}" style="object-fit: cover;">-->
+                    <img class="img-fluid h-100" src="{{ i.image.url }}" style="object-fit: cover;">
+                    <div class="overlay">
+                        <div class="mb-2">
+                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                               href="post/{{i.id}}">{{i.title}}</a>
+                            <a class="text-white" href="">{{i.created_date}}</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-lg-5 border border-warning findClass backgroundFind">
+            <div class="row mx-5">
+                <div class="row px-5 mt-5 pb-5">
+                    <div>
+                    <small>Количество активных пользоваталей сейчас: </small>
+                    <strong>{{ anonym }}</strong>
+                        </div>
+                    <form action="blog/search/" method="post">
+                        {% csrf_token %}
+                        <fieldset>
+<!--                            <legend>Кого найти?</legend>-->
+                            <legend>Коррупционеры и ОПГ</legend>
+                            <p>Поиск по ФИО:</p>
+                            <input type="text" name="name" placeholder="Инициалы..." class="form-control"
+                                   onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>
+
+                            <p class="mt-5">Поиск по должности:</p>
+                            <input type="text" name="position" placeholder="Должность..." class="form-control"
+                                   onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>
+                            <input type="submit" class="mt-0" name="go" id="go" value="Поиск..." class="form-control" />
+
+                        </fieldset>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-title">
+                                    <h4 class="m-0 text-uppercase font-weight-bold" id="news">Последние новости</h4>
+                                    <a class="text-secondary font-weight-medium text-decoration-none" href="news/all">Смотреть все</a>
+                                </div>
+                            </div>
+                    {% for i in posts %}
+                            <div class="col-lg-6">
+                                <div class="position-relative mb-3">
+                                    <img class="img-fluid w-100" src="{{ i.image.url }}"
+                                         style="object-fit: cover;">
+                                    <div class="bg-white border border-top-0 p-4">
+                                        <div class="mb-2">
+                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                                               href="##">{{ i.category.title }}</a>
+                                            <a class="text-body" href="post/{{i.id}}"><small>{{ i.created_date }}</small></a>
+                                        </div>
+                                        <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"
+                                           href="post/{{i.id}}">{{ i.title }}</a>
+                                        <p class="m-0">{{ i.description }}</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
+                                        <div class="d-flex align-items-center">
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <a href="post/{{i.id}}">Читать поробнее...</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                               {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid pt-5" >
+            <div class="container" >
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-title">
+                                    <h4 class="m-0 text-uppercase font-weight-bold"  id="economica">Экономика</h4>
+                                    <a class="text-secondary font-weight-medium text-decoration-none" href="economic/all">Смотреть
+                                        все</a>
+                                </div>
+                            </div>
+                            <div class="card-group">
+                             <div class="row row-cols-1 row-cols-md-3 g-4">
+                                 {% for i in newsEconom %}
+                                   <a href="post/{{i.id}}">
+                                      <div class="col">
+                                        <div class="card h-100">
+                                          <img src="{{ i.image.url }}" class="card-img-top" alt="...">
+                                          <div class="card-body">
+                                            <h5 class="card-title">{{ i.title }}</h5>
+                                            <p class="card-text">{{ i.description }}</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                   </a>
+                                 {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                  <div class="container-fluid pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-title">
+                                    <h4 class="m-0 text-uppercase font-weight-bold">Преступления</h4>
+                                    <a class="text-secondary font-weight-medium text-decoration-none" href="criminal/all">Смотреть
+                                        все</a>
+                                </div>
+                            </div>
 
 
-<div><h3>Экономика</h3>
-<table class="table">
-    <tr>
-        <th>Новость</th>
-        <th>описание</th>
-    </tr>
-    {% for ec in newsEconom %}
-    <tr>
-        <td>{{ec.title}}</td>
-        <td>{{ec.id}}</td>
-        <td>{{ec.overview | safe}}</td>
-<!--        <td><a href="detail/{{ec.id}}">Подробнее</a></td>-->
-        <td><a href="post/{{ec.id}}">Подробнее</a></td>
-            </tr>
-    {% endfor %}
-</table>
-    <br> <br> <br> <br> <br> <br> <br>
-</div>
-<div><h3>Преступления</h3>
-    <table class="table">
-    <tr>
-        <th>Новость</th>
-        <th>описание</th>
-    </tr>
-    {% for cr in newsCriminal %}
-    <tr>
-        <td>{{cr.title}}</td>
-        <td>{{cr.overview | safe}}</td>
-<!--        <td><a href="detail/{{cr.id}}">Подробнее</a></td>-->
-          <td><a href="post/{{cr.id}}/">Подробнее</a></td>
-            </tr>
-    {% endfor %}
-</table>
-</div>
- <br> <br> <br> <br> <br> <br>
-<div><h3>Спорт</h3>
-<table class="table">
-    <tr>
-        <th>Новость</th>
-        <th>описание</th>
-    </tr>
-    {% for n in newsSport %}
-    <tr>
-        <td>{{n.title}}</td>
-         <td>{{n.overview | safe}}</td>
-<!--        <td><a href="detail/{{n.id}}">Подробнее</a></td>-->
-        <td><a href="post/{{n.id}}/">Подробнее</a></td>
-            </tr>
-    {% endfor %}
-</table>
-     <br> <br> <br> <br>
-</div>
-
-<div id="search">
-      <form action="search/" method="post">
-         {% csrf_token %}
-        <fieldset>
-          <legend>Веедите инициалы</legend>
-          <p>Введите инициалы</p>
-          <input type="text" name ="name"   onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;" />
-        <p>Введите должность</p>
-          <input type="text" name ="position"  onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;" />
-          <input type="submit" name="go" id="go" value="Search" />
-        </fieldset>
-      </form>
+                                <div class="card-group">
+                     <div class="row row-cols-1 row-cols-md-3 g-4">
+                         {% for i in newsCriminal %}
+                            <a href="post/{{i.id}}">
+                              <div class="col">
+                                <div class="card h-100">
+                                  <img src="{{ i.image.url }}" class="card-img-top" alt="...">
+                                  <div class="card-body">
+                                 <h5 class="card-title">{{ i.title }}</h5>
+                                    <p class="card-text">{{ i.description }}</p>
+                                  </div>
+                                </div>
+                              </div>
+                                </a>
+                         {% endfor %}
+                    </div>
     </div>
+                    </div>
+</div>
+                    <div class="container-fluid pt-5">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="section-title">
+                                                <h4 class="m-0 text-uppercase font-weight-bold">Спорт</h4>
+                                                <a class="text-secondary font-weight-medium text-decoration-none" href="sport/all">Смотреть
+                                                    все</a>
+                                            </div>
+                                        </div>
+                                            <div class="card-group">
+                                 <div class="row row-cols-1 row-cols-md-3 g-4">
+                                     {% for i in newsSport %}
+                                       <a href="post/{{i.id}}">
+                                          <div class="col">
+                                            <div class="card h-100">
+                                              <img src="{{ i.image.url }}" class="card-img-top" alt="...">
+                                              <div class="card-body">
+                                                <h5 class="card-title">{{ i.title }}</h5>
+                                                <p class="card-text">{{ i.description }}</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                       </a>
+                                     {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                <div class="container-fluid pt-5">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="section-title">
+                                                <h4 class="m-0 text-uppercase font-weight-bold">Новости СНГ</h4>
+                                                <a class="text-secondary font-weight-medium text-decoration-none" href="sng/all">Смотреть все</a>
+                                            </div>
+                                        </div>
+                                            <div class="card-group">
+                                 <div class="row row-cols-1 row-cols-md-3 g-4">
+                                     {% for i in sng %}
+                                       <a href="sng/{{i.id}}">
+                                          <div class="col">
+                                            <div class="card h-100">
+                                              <img src="{{ i.image.url }}" class="card-img-top" alt="...">
+                                              <div class="card-body">
+                                                <h5 class="card-title">{{ i.title }}</h5>
+                                                <p class="card-text">{{ i.description }}</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                       </a>
+                                     {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                            <div class="col-12">
+                                <div class="section-title">
+                                    <h4 class="btn btn-primary btn-lg btn-block"><a href="news/all" style="color:black">Читать все новоcти</a></h4>
+                                </div>
+                            </div>
+                        </div>
 
-</body>
-</html>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+     {% endblock %}

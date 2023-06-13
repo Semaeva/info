@@ -9675,19 +9675,3 @@ h6,
   padding: 0;
   list-style-type: none;
 }
-
-.text-truncate {
-    max-width: 800px;
-}
-
-.responsive-input {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-}
-
-@media (max-width: 768px) {
-  .responsive-input {
-    font-size: 14px;
-  }
-}
