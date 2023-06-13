@@ -2,7 +2,7 @@ import hitcount.models
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from hitcount.models import Hit
-
+from django.core.paginator import Paginator, Page
 from .models import *
 from django.db.models import Q
 from fuzzywuzzy import fuzz

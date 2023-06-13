@@ -3,9 +3,12 @@
 {% load embed_video_tags %}
 {% load static %}
 
+<div class="py-5">
 
 <h2 class="text-center">{{ newssng.title }}</h2>
-<div class="row mx-5">{{ newssng.overview | safe }}<img src="{{ post.image.url }}" class="img-fluid rounded-start" style="width: 400px;">
+    </div>
+<div>
+<div class="row mx-5">{{ newssng.overview | safe }}<img src="{{ newssng.image.url }}" class="img-fluid rounded-start" style="width: 400px;">
 </div>
 </div>
 {% endblock %}

@@ -112,6 +112,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-ru'
 
+LANGUAGES = (
+    ('ru', 'Russian'),
+    ('kg', 'Kyrgyzstan'),
+)
+
 TIME_ZONE = 'Asia/Bishkek'
 
 USE_I18N = True

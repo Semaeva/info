@@ -3,29 +3,47 @@
 
 {% load static %}
 <h2>Репортер</h2>
+<div class="list-group">
+    {% for item in news %}
 
+<a href="/post/{{item.id}}" class="list-group-item list-group-item-action">
+    <div class="media">
+      <img src="{{ item.image.url }}" class="mr-3" alt="Изображение новости 1" width="200px">
+      <div class="media-body">
+          <h6 class="mt-0 text-left text-warning">{{ item.departments.title }}</h6>
 
-<div class="row text-dark">
-       {% for item in news %}
-     <a href="/post/{{item.id}}">
-      <div class="col-md-2">
-          <div class="card-deck">
-        <div class="card">
-              <img src="{{ item.image.url }}" class="card-img-top" alt="...">
-          <a href="">{{ item.category.title }}</a>
-            <div class="card-body">
-                <h5 class="card-title">{{ с.title }}</h5>
-                <p class="card-text">{{ item.description }}</p>
-            </div>
-             <div class="card-footer">
-      <small class="text-muted"><p class="card-text">{{ item.created_date }}</p></small>
-    </div>
-        </div>
-    </div>
+        <h4 class="mt-0 text-left">{{ item.title }}</h4>
+        <p class="mb-1">{{ item.description }}</p>
+        <small>{{ item.created_date }}</small>
       </div>
-     </a>
-          {% endfor %}
+    </div>
+  </a>
 
-      </div>
+ {% endfor %}
+</div>
+
+
+<!--<div class="row text-dark">-->
+<!--       {% for item in news %}-->
+<!--     <a href="/post/{{item.id}}">-->
+<!--      <div class="col-md-2">-->
+<!--          <div class="card-deck">-->
+<!--        <div class="card">-->
+<!--              <img src="{{ item.image.url }}" class="card-img-top" alt="...">-->
+<!--          <a href="">{{ item.category.title }}</a>-->
+<!--            <div class="card-body">-->
+<!--                <h5 class="card-title">{{ с.title }}</h5>-->
+<!--                <p class="card-text">{{ item.description }}</p>-->
+<!--            </div>-->
+<!--             <div class="card-footer">-->
+<!--      <small class="text-muted"><p class="card-text">{{ item.created_date }}</p></small>-->
+<!--    </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--      </div>-->
+<!--     </a>-->
+<!--          {% endfor %}-->
+
+<!--      </div>-->
 
      {% endblock %}
