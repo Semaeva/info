@@ -61,6 +61,7 @@ class ReleaseDetailView(HitCountDetailView):
     template_name = 'release_detail.html'
     count_hit = True
 
+
 class GovnoDetailView(HitCountDetailView):
     model = Govno
     template_name = 'dopinfo.html'
@@ -115,54 +116,7 @@ def opg_list(request):
 def korrupcia_list(request):
     news = Post.objects.filter(category=5)
     return render(request, 'korrupcia.html', {'news': news})
-#
-# class PostDetailView(HitCountDetailView):
-#     model = Post
-#     template_name = 'post.html'
-#     slug_field = "slug"
-#     count_hit = True
 
-    # def __str__(self):
-    #     return self.count_hit
-
-
-# def news_list(request):
-#     news = News.objects.order_by('-id')[:5]
-#     newsImg = NewsImage.objects.all()
-#     newsTop = News.objects.all()
-#     newsEcnom = News.objects.filter(category= 1 ).all()
-#     newsSport = News.objects.filter(category= 3 ).all()
-#     newsCriminal = News.objects.filter(category= 2 ).all()
-#     return render(request, 'index_.html', {'news': news,
-#                                           'newsImg':newsImg,
-#                                           'newsEcnom':newsEcnom,
-#                                           'newsCriminal': newsCriminal,
-#                                           'newsSport': newsSport
-#                                           })
-
-
-# def economic_list(request):
-#     news = Post.objects.filter(category=2)
-#     return render(request, 'detail.html', {'news': news})
-
-
-# def all_view(request, id):
-#     my_object = get_object_or_404(Post, id=id)
-#
-#     # Увеличение счетчика просмотров
-#     my_object.hit_count_generic.hit()
-#     return render(request, 'views.html', {'my_object': my_object})
-#
-#
-# def news_detail(request, id):
-#     news = Post.objects.get(id=id)
-#     return render(request, 'detail.html', {'news': news})
-
-
-# class NewsDetailView(DetailView):
-#     model = News
-#     template_name = "detail_news.html"
-#     slug_field = "slug"
 
 
 def search(request):
