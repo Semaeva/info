@@ -22,6 +22,7 @@ urlpatterns = [
     path('release/<int:pk>/', ReleaseDetailView.as_view(), name='realese-detail'),
     # path('news/post/<int:pk>/', PostDetailView.as_view(), name='posts-detail'),
     path('release/all/', release_list),
+    
 
 
 ]

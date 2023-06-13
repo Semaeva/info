@@ -4,7 +4,6 @@
 
 {% block page_content %}
 
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-7 px-0">
@@ -16,7 +15,7 @@
                     <div class="overlay">
                         <div class="mb-2">
                             <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                               href="post/{{i.id}}+">{{i.title}}</a>
+                               href="post/{{i.id}}">{{i.title}}</a>
                             <a class="text-white" href="">{{i.created_date}}</a>
                         </div>
                     </div>
@@ -33,12 +32,14 @@
 <!--                            <legend>Кого найти?</legend>-->
                             <legend>Коррупционеры и ОПГ</legend>
                             <p>Поиск по ФИО:</p>
-                            <input type="text" name="name" placeholder="Инициалы..."
+                            <input type="text" name="name" placeholder="Инициалы..." class="form-control"
                                    onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>
+
                             <p class="mt-5">Поиск по должности:</p>
-                            <input type="text" name="position" placeholder="Должность..."
+                            <input type="text" name="position" placeholder="Должность..." class="form-control"
                                    onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>
-                            <input type="submit" class="mt-0" name="go" id="go" value="Поиск..."/>
+                            <input type="submit" class="mt-0" name="go" id="go" value="Поиск..." class="form-control" />
+
                         </fieldset>
                     </form>
 
@@ -228,22 +229,8 @@
             </div>
         </div>
 
-                        <!-- Popular News End -->
-                        <!-- Footer Start -->
-                        <div class="container-fluid py-4 px-sm-3 px-md-5" style="background: #111111;">
-                            <p class="m-0 text-center">&copy; <a href="#">УРУУ.KG</a> Все права защищены.
-                        </div>
-                        <!-- Footer End -->
-                        <!-- Back to Top -->
-                        <a href="#" class="btn btn-primary btn-square back-to-top"><i class="fa fa-arrow-up"></i></a>
-                        <!-- JavaScript Libraries -->
-                        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-                        <script src="{% static 'lib/easing/easing.min.js' %}"></script>
-                        <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
 
-                        <!-- Template Javascript -->
-                        <script src="{% static 'js/main.js' %}"></script>
+
                     </div>
                 </div>
             </div>
