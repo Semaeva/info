@@ -17,7 +17,7 @@
         <h5 class="card-title"><strong>Инициалы: </strong>{{ govno.name }}</h5>
         <h5 class="card-title"><strong>Дата Рождения: </strong>{{ govno.birth }}</h5>
         <h6 class="card-text"><strong>Должность: </strong>{{ govno.position }}</h6>
-        <h6 class="card-text"><h6><strong>Основная деятельность: </strong>{{ govno.resume }}</h6>
+        <h6 class="card-text"><h6><strong>Основная деятельность: </strong>{{ govno.resume | safe }}</h6>
         {% if govno.criminal_record  %}
         <h6 class="card-text"><strong>Судимость: </strong>Да</h6>
             {% if govno.years  %}

@@ -19,7 +19,7 @@ class Post(models.Model, HitCountMixin):
     overview = RichTextField()
     category = models.ForeignKey("Category", on_delete=models.CASCADE, blank=True, null=True)
     created_date = models.DateField(auto_now_add=False)
-    image = models.ImageField(upload_to='newsImage/', blank=True, null=True)
+    image = models.ImageField(upload_to='newsImage/', blank=False, null=False)
     description = models.TextField(default='')
     top_news = models.BooleanField(default=False)
 
@@ -32,13 +32,12 @@ class Post(models.Model, HitCountMixin):
         verbose_name_plural = "Новости"
 
 
-
 class Press_release(models.Model):
     title = models.CharField(max_length=225)
     overview = RichTextField()
     departments = models.ForeignKey("Department", on_delete=models.CASCADE, blank=True, null=True)
     created_date = models.DateField(auto_now_add=False)
-    image = models.ImageField(upload_to='pressRelease/', blank=True, null=True)
+    image = models.ImageField(upload_to='pressRelease/',  blank=False, null=False)
     description = models.TextField(default='')
     top_news = models.BooleanField(default=False)
 
@@ -56,7 +55,7 @@ class NewsSNG(models.Model):
     overview = RichTextField()
     sng = models.ForeignKey("Country", on_delete=models.CASCADE, blank=True, null=True)
     created_date = models.DateField(auto_now_add=False)
-    image = models.ImageField(upload_to='pressRelease/', blank=True, null=True)
+    image = models.ImageField(upload_to='pressRelease/',  blank=False, null=False)
     description = models.TextField(default='')
     top_news = models.BooleanField(default=False)
 
@@ -106,7 +105,7 @@ class NewsSngImage(models.Model):
 
 
 class Category(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField('Наименование', max_length=200)
 
     def __str__(self):
         return self.title
@@ -116,9 +115,8 @@ class Category(models.Model):
         verbose_name_plural = "Категория"
 
 
-
 class Department(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField('Наименование',max_length=200)
 
     def __str__(self):
         return self.title
@@ -129,7 +127,7 @@ class Department(models.Model):
 
 
 class Country(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField('Наименование', max_length=200)
 
     def __str__(self):
         return self.title
@@ -141,16 +139,18 @@ class Country(models.Model):
 
 class Govno(models.Model, HitCountMixin):
     name = models.CharField('ФИО', max_length=253, default='', blank=False, null=False)
-    birth = models.DateField(default=datetime.today)
-    position = models.CharField(max_length=253, default='неизвестно')
-    department = models.CharField(max_length=250, default='неизвестно')
-    resume = models.TextField(default='')
-    dop_info = models.TextField(default='', blank=True, null=True)
+    birth = models.DateField("Дата рождения", default=datetime.today)
+    position = models.CharField('Должность', max_length=253, default='неизвестно')
+    department = models.CharField('Место работы', max_length=250, default='неизвестно')
+    # resume = models.TextField(default='')
+    # dop_info = models.TextField(default='', blank=True, null=True)
+    resume = RichTextField('Основная деятесльность')
+    dop_info = RichTextField('Дополнительная информация')
     created_date = models.DateField('Дата события', auto_now_add=False)
-    criminal_record = models.BooleanField(default=False)
-    years = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='avatars/', blank=True, null=True)
-    video = EmbedVideoField(blank=True, null=True)
+    criminal_record = models.BooleanField('Судимость', default=False)
+    years = models.CharField('Годы судимости', max_length=100)
+    image = models.ImageField('Фотографии', upload_to='avatars/',  blank=False, null=False)
+    video = EmbedVideoField('Ссылка на видео', blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -174,7 +174,6 @@ class GovnoImage(models.Model):
 
 class AnonymousUserCount(models.Model, HitCountMixin):
     ip_address = models.GenericIPAddressField(unique=True)
-
     hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk',
                                         related_query_name='hit_count_generic_relation')
     created_date = models.DateTimeField(auto_now=True)

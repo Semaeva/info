@@ -8,7 +8,7 @@ from hitcount.models import Hit
 from django.core.paginator import Paginator, Page
 
 from .models import *
-from django.db.models import Q
+from django.db.models import Q, Max
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 from django.contrib.contenttypes.models import ContentType
@@ -19,9 +19,6 @@ from django.views.generic.detail import DetailView
 
 def list_top_news():
     data = list()
-    # top_list=list()
-    # for i in list(HitCount.objects.all()):
-    #     top_list.append(i.hits)
     for i in HitCount.objects.all():
         data.append(i.object_pk)
     if data:
@@ -88,6 +85,15 @@ class GovnoDetailView(HitCountDetailView):
 
 
 def release_list(request):
+    # news = Press_release.objects.all()
+    subquery = Press_release.objects.values('departments_id').annotate(max_departments_id=Max('departments_id')).values('max_departments_id')
+    print(subquery)
+    news = Press_release.objects.values_list('departments_id', flat=True).distinct()
+
+    return render(request, 'release.html', {'news': news})
+
+
+def press_release_list(request):
     news = Press_release.objects.all()
     return render(request, 'release.html', {'news': news})
 
@@ -122,22 +128,28 @@ def analitika_list(request):
     return render(request, 'analitika.html', {'news': news})
 
 
-def news_list(request, page_number=1):
+def news_list(request):
     news = Post.objects.all()
-    paginated  = Paginator(news, 9)
+    paginated = Paginator(news, 9)
     page_number = request.GET.get('page')
     page = paginated.get_page(page_number)
-    return render(request, 'all_news.html', {'news': page })
+    return render(request, 'all_news.html', {'news': page})
 
 
 def opg_list(request):
     news = Post.objects.filter(category=6)
-    return render(request, 'opg.html', {'news': news})
+    paginated = Paginator(news, 9)
+    page_number = request.GET.get('page')
+    page = paginated.get_page(page_number)
+    return render(request, 'opg.html', {'news': page})
 
 
 def korrupcia_list(request):
     news = Post.objects.filter(category=5)
-    return render(request, 'korrupcia.html', {'news': news})
+    paginated = Paginator(news, 9)
+    page_number = request.GET.get('page')
+    page = paginated.get_page(page_number)
+    return render(request, 'korrupcia.html', {'news': page})
 
 
 def search(request):
@@ -177,6 +189,5 @@ def count_anonim(request):
     # HitCountMixin.hit_count(request, anonymous_user_count)
 
     # return render(request, 'count.html', {'anonymous_user_count': anonymous_user_count})
-
 
 

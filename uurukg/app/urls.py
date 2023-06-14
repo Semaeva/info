@@ -22,10 +22,4 @@ urlpatterns = [
     # path('news/post/<int:pk>/', PostDetailView.as_view(), name='posts-detail'),
     path('release/all/', release_list),
 
-
-
-    # path('', count_anonim),
-
-
-
 ]
