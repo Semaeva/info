@@ -1,46 +1,68 @@
+
+
 {% extends 'base.html' %}
 {% block page_content %}
 
 {% load static %}
-<h2>Аналитика</h2>
 
-<div class="list-group">
-    {% for item in news %}
+<div class="container-fluid pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-title text-center">
+                                    <h4 class="m-0 text-uppercase text-center font-weight-bold" id="economica">Аналитика</h4>
+                                </div>
+                            </div>
+                            {% for i in news %}
+                            <div class="col-lg-4" style="text-overflow: ellipsis">
+                                <div class="position-relative mb-3">
+                                    <img class="img-fluid w-100" src="{{ i.image.url }}"
+                                         style="object-fit: cover;">
+                                    <div class="bg-white border border-top-0 p-4">
+                                        <div class="mb-2">
+                                            <a class="text-body" href="post/{{i.id}}">
+                                                <small>{{ i.created_date }}</small></a>
+                                        </div>
+                                      <h4>{{ i.title }}</h4>
+                                        <p class="m-0">{{ i.description }}</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
+                                        <div class="d-flex align-items-center">
+                                        </div>
+                                        <div class="d-flex align-items-center btn">
+                                            <a href="/post/{{i.id}}" class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"  >Читать поробнее...</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="col-lg-10 text-right mb-3 mt-3">
+  {% if page.has_previous %}
+        <a href="?page={{page.previous_page_number}}" class="btn btn-secondary mx-2">Пред.</a>
+    {% endif %}
 
-<a href="/post/{{item.id}}" class="list-group-item list-group-item-action">
-    <div class="media">
-      <img src="{{ item.image.url }}" class="mr-3" alt="Изображение новости 1" width="200px">
-      <div class="media-body">
-          <h6 class="mt-0 text-left text-warning">{{ item.departments.title }}</h6>
+    <a href="?page=1" class="btn btn-secondary">Первая</a>
 
-        <h4 class="mt-0 text-left">{{ item.title }}</h4>
-        <p class="mb-1">{{ item.description }}</p>
-        <small>{{ item.created_date }}</small>
-      </div>
+    {% for num in news.paginator.page_range %}
+
+        {% if num == page.number %}
+            <span>{{ num }}</span>
+        {% else %}
+            <a href="?page={{num}}" class="btn btn-secondary mx-2">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    <a href="?page={{page.paginator.num_pages}}" class="btn btn-secondary mx-2">Последняя</a>
+
+    {% if page.has_next %}
+        <a href="?page={{page.next_page_number}}" class="btn btn-secondary mx-2">След.</a>
+    {% endif %}
     </div>
-  </a>
-
- {% endfor %}
-</div>
-<!--<div class="row text-dark">-->
-<!--       {% for item in news %}-->
-<!--     <a href="/post/{{item.id}}">-->
-<!--      <div class="col-md-3">-->
-<!--          <div class="card-deck">-->
-<!--        <div class="card">-->
-<!--              <img src="{{ item.image.url }}" class="card-img-top" alt="...">-->
-<!--          <a href="">{{ item.category.title }}</a>-->
-<!--            <div class="card-body">-->
-<!--                <h5 class="card-title">{{ с.title }}</h5>-->
-<!--                <p class="card-text">{{ item.description }}</p>-->
-<!--            </div>-->
-<!--             <div class="card-footer">-->
-<!--      <small class="text-muted"><p class="card-text">{{ item.created_date }}</p></small>-->
-<!--    </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--     </a>-->
-<!--          {% endfor %}-->
-<!--      </div>-->
-<!--</div>-->
      {% endblock %}

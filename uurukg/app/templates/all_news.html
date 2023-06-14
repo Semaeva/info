@@ -26,11 +26,13 @@
 </div>
 
 
- {% if page.has_previous %}
-        <a href="?page={{page.previous_page_number}}" class="btn btn-secondary mx-2">Previous</a>
+
+<div class="col-lg-10 text-right mb-3 mt-3">
+  {% if page.has_previous %}
+        <a href="?page={{page.previous_page_number}}" class="btn btn-secondary mx-2">Пред.</a>
     {% endif %}
 
-    <a href="?page=1" class="btn btn-secondary">First</a>
+    <a href="?page=1" class="btn btn-secondary">Первая</a>
 
     {% for num in news.paginator.page_range %}
 
@@ -41,10 +43,11 @@
         {% endif %}
     {% endfor %}
 
-    <a href="?page={{page.paginator.num_pages}}" class="btn btn-secondary mx-2">Last</a>
+    <a href="?page={{page.paginator.num_pages}}" class="btn btn-secondary mx-2">Последняя</a>
 
     {% if page.has_next %}
-        <a href="?page={{page.next_page_number}}" class="btn btn-secondary mx-2">Next</a>
+        <a href="?page={{page.next_page_number}}" class="btn btn-secondary mx-2">След.</a>
     {% endif %}
+    </div>
 
 {% endblock %}

@@ -84,18 +84,18 @@ class GovnoDetailView(HitCountDetailView):
     count_hit = True
 
 
-def release_list(request):
-    # news = Press_release.objects.all()
-    subquery = Press_release.objects.values('departments_id').annotate(max_departments_id=Max('departments_id')).values('max_departments_id')
-    print(subquery)
-    news = Press_release.objects.values_list('departments_id', flat=True).distinct()
+def release_list(request, id):
+    news = Press_release.objects.filter(departments_id=id)
+    department = Department.objects.get(id=id)
+    paginated = Paginator(news, 9)
+    page_number = request.GET.get('page')
+    page = paginated.get_page(page_number)
+    return render(request, 'release.html', {'news': page, 'department': department})
 
-    return render(request, 'release.html', {'news': news})
 
-
-def press_release_list(request):
-    news = Press_release.objects.all()
-    return render(request, 'release.html', {'news': news})
+def department_list(request):
+    department = Department.objects.all()
+    return render(request, 'department.html', {'department': department})
 
 
 def economic_list(request):
@@ -110,22 +110,34 @@ def sng_list(request):
 
 def criminal_list(request):
     news = Post.objects.filter(category=1)
-    return render(request, 'criminal.html', {'news': news})
+    paginated = Paginator(news, 9)
+    page_number = request.GET.get('page')
+    page = paginated.get_page(page_number)
+    return render(request, 'criminal.html', {'news': page})
 
 
 def sport_list(request):
     news = Post.objects.filter(category=3)
-    return render(request, 'sport.html', {'news': news})
+    paginated = Paginator(news, 9)
+    page_number = request.GET.get('page')
+    page = paginated.get_page(page_number)
+    return render(request, 'sport.html', {'news': page})
 
 
 def repoter_list(request):
     news = Post.objects.filter(category=7)
-    return render(request, 'reporter.html', {'news': news})
+    paginated = Paginator(news, 9)
+    page_number = request.GET.get('page')
+    page = paginated.get_page(page_number)
+    return render(request, 'reporter.html', {'news': page})
 
 
 def analitika_list(request):
     news = Post.objects.filter(category=4)
-    return render(request, 'analitika.html', {'news': news})
+    paginated = Paginator(news, 9)
+    page_number = request.GET.get('page')
+    page = paginated.get_page(page_number)
+    return render(request, 'analitika.html', {'news': page})
 
 
 def news_list(request):
@@ -136,12 +148,12 @@ def news_list(request):
     return render(request, 'all_news.html', {'news': page})
 
 
-def opg_list(request):
-    news = Post.objects.filter(category=6)
-    paginated = Paginator(news, 9)
-    page_number = request.GET.get('page')
-    page = paginated.get_page(page_number)
-    return render(request, 'opg.html', {'news': page})
+# def opg_list(request):
+#     news = Post.objects.filter(category=6)
+#     paginated = Paginator(news, 9)
+#     page_number = request.GET.get('page')
+#     page = paginated.get_page(page_number)
+#     return render(request, 'opg.html', {'news': page})
 
 
 def korrupcia_list(request):

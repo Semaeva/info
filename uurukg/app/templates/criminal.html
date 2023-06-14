@@ -1,35 +1,68 @@
+
+
 {% extends 'base.html' %}
 {% block page_content %}
 
 {% load static %}
-<h2>Преступления</h2>
 
-<div class="row text-dark">
-       {% for item in news %}
-     <a href="/post/{{item.id}}">
-      <div class="col-md-4">
-          <div class="card-deck">
-        <div class="card">
-              <img src="{{ item.image.url }}" class="card-img-top" alt="...">
-          <a href="#">{{ item.category.title }}</a>
-            <div class="card-body">
-                <a href="/post/{{item.id}}"><h5 class="card-title">{{ item.title }}</h5></a>
-                <p class="card-text">{{ item.description }}</p>
-            </div>
-             <div class="card-footer">
-                 <small class="text-muted">{{ item.created_date }}</small>
-<!--                    <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold" href="/post/{{item.id}}">{{ item.title }}</a>-->
+<div class="container-fluid pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-title text-center">
+                                    <h4 class="m-0 text-uppercase text-center font-weight-bold" id="economica">Криминал</h4>
+                                </div>
+                            </div>
+                            {% for i in news %}
+                            <div class="col-lg-4" style="text-overflow: ellipsis">
+                                <div class="position-relative mb-3">
+                                    <img class="img-fluid w-100" src="{{ i.image.url }}"
+                                         style="object-fit: cover;">
+                                    <div class="bg-white border border-top-0 p-4">
+                                        <div class="mb-2">
+                                            <a class="text-body" href="post/{{i.id}}">
+                                                <small>{{ i.created_date }}</small></a>
+                                        </div>
+                                        <h4>{{ i.title }}</h4>
+                                        <p class="m-0">{{ i.description }}</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
+                                        <div class="d-flex align-items-center">
+                                        </div>
+                                        <div class="d-flex align-items-center btn">
+                                            <a href="/post/{{i.id}}" class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"  >Читать поробнее...</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+<div class="col-lg-10 text-right mb-3 mt-3">
+  {% if page.has_previous %}
+        <a href="?page={{page.previous_page_number}}" class="btn btn-secondary mx-2">Пред.</a>
+    {% endif %}
+
+    <a href="?page=1" class="btn btn-secondary">Первая</a>
+
+    {% for num in news.paginator.page_range %}
+
+        {% if num == page.number %}
+            <span>{{ num }}</span>
+        {% else %}
+            <a href="?page={{num}}" class="btn btn-secondary mx-2">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    <a href="?page={{page.paginator.num_pages}}" class="btn btn-secondary mx-2">Последняя</a>
+
+    {% if page.has_next %}
+        <a href="?page={{page.next_page_number}}" class="btn btn-secondary mx-2">След.</a>
+    {% endif %}
     </div>
-      </div>
-     </a>
-{% endfor %}
-</div>
-
-
-<!--<p>{{i.title}}</p>-->
-<!--<br><br><br><br><br><br><br><br><br><br>-->
-
-
      {% endblock %}

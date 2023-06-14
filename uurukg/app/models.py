@@ -116,7 +116,8 @@ class Category(models.Model):
 
 
 class Department(models.Model):
-    title = models.CharField('Наименование',max_length=200)
+    title = models.CharField('Наименование', max_length=200)
+    image = models.ImageField(upload_to='departments/logo/',  blank=False, null=False)
 
     def __str__(self):
         return self.title
