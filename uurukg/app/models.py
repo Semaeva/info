@@ -16,14 +16,14 @@ from modeltranslation.fields import TranslationField
 
 
 class Post(models.Model, HitCountMixin):
-    title = models.CharField(max_length=225)
+    title = models.CharField('Наименование', max_length=225)
     # title = models.CharField(max_length=225)
-    overview = RichTextField()
+    overview = RichTextField('Полное описание')
     category = models.ForeignKey("Category", on_delete=models.CASCADE, blank=True, null=True)
-    created_date = models.DateField(auto_now_add=False)
-    image = models.ImageField(upload_to='newsImage/', blank=False, null=False)
-    description = models.TextField(default='', max_length=180, blank=False, null=False)
-    top_news = models.BooleanField(default=False)
+    created_date = models.DateField('Дата создания',auto_now_add=False)
+    image = models.ImageField('Главная фотография', upload_to='newsImage/', blank=False, null=False)
+    description = models.TextField('Краткое описание', default='', max_length=180, blank=False, null=False)
+    top_news = models.BooleanField('Топ новость',default=False)
 
     def __str__(self):
         return self.title
@@ -107,7 +107,7 @@ class NewsSngImage(models.Model):
 
 
 class Category(models.Model):
-    title = models.CharField('Наименование', max_length=200)
+    title = models.CharField('Наименование категории', max_length=200)
 
     def __str__(self):
         return self.title
