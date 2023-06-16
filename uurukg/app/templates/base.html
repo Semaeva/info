@@ -2,18 +2,18 @@
 {% load static %}
 <html lang="en">
 {% load tz %}
-
+{% load i18n %}
 
 
 <head>
     <meta charset="utf-8">
-    <title>Уруу KG</title>
+    <title>Уруу.НЕТ</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -24,6 +24,9 @@
 
     <!-- Libraries Stylesheet -->
     <link href="{%static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+    <link rel="stylesheet" href="{% static 'css/lightbox.min.css' %}">
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{%static 'css/style.css' %}" rel="stylesheet">
@@ -40,7 +43,7 @@
                     <li class="nav-item border-right border-secondary">
                         <a class="nav-link text-body small" href="#">{% get_current_timezone as TIME_ZONE %}
                             {% timezone TIME_ZONE %}
-                                {% now "j F, Y " as current_date %}
+                            {% now "j F, Y " as current_date %}
                             {{ current_date }}
                             {% endtimezone %} </a>
                     </li>
@@ -48,15 +51,30 @@
             </nav>
         </div>
     </div>
+      <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}">
+                        <select name="language">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% get_language_info_list for LANGUAGES as languages %}
+                            {% for language in languages %}
+                                <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
+                                        selected{% endif %}>
+                                    {{ language.name_local }} ({{ language.code }})
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <input type="submit" value="Go">
+                    </form>
     <div class="row align-items-center bg-white py-3 px-lg-5">
         <div class="col-lg-4">
             <a href="/" class="navbar-brand p-0 d-none d-lg-block">
                 <h1 class="m-0 display-4 text-uppercase text-primary">УУРУ<span
-                        class="text-secondary font-weight-normal"><small>.нет</small></span></h1>
+                        class="text-secondary font-weight-normal"><small>.НЕТ</small></span></h1>
             </a>
         </div>
-        <div class="col-lg-7 text-right m-0">
-            <h5><i style="color: red">Китайцы расстреливают коррупцию, <br>а мы убиваем её информационно.</i></h5>
+        <div class="col-lg-7 text-right">
+            <i style="color: red">Китайцы расстреливают коррупцию, <br>а мы убиваем её информационно.</i>
         </div>
         <div class="col-lg-8 text-center text-lg-right">
             <a href="https://htmlcodex.com"><img class="img-fluid" src="img/ads-728x90.png" alt=""></a>
@@ -78,35 +96,28 @@
         </button>
         <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
             <div class="navbar-nav mr-auto py-0">
-                <a href="/" class="nav-item nav-link active">Главная</a>
+                <a href="/" class="nav-item nav-link active">{% trans "Главная" %}</a>
                 <div class="nav-item dropdown">
-                    <a href="/news/all" class="nav-link dropdown-toggle" data-toggle="dropdown">События</a>
-                    <div class="dropdown-menu rounded-0 m-0">
-                         <a href="/sng/all" class="dropdown-item">Новости СНГ</a>
-                        <a href="/economic/all" class="dropdown-item">Экономика</a>
-                        <a href="/sport/all" class="dropdown-item">Спорт</a>
+                    <a href="/news/all" class="nav-link dropdown-toggle" data-toggle="dropdown">{% trans "События" %}</a>
+                    <div class="dropdown-menu rounded-0 m-0 p-0 bg-dark">
+                        <a href="/sng/all" class="dropdown-item nav-link">{% trans "Новости СНГ" %}</a>
+                        <a href="/economic/all" class="dropdown-item nav-link">{% trans "Экономика" %}</a>
+                        <a href="/sport/all" class="dropdown-item nav-link">{% trans "Спорт" %}</a>
                     </div>
                 </div>
-<!--                <div class="nav-item dropdown">-->
-<!--                    <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">События</a>-->
-<!--                    <div class="dropdown-menu rounded-0 m-0">-->
-<!--                        <a href="/korrupcia/all" class="dropdown-item">Коррупция</a>-->
-<!--                        <a href="/opg/all" class="dropdown-item">ОПГ</a>-->
-<!--                        <a href="/criminal/all" class="dropdown-item">Преступления</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-                <a href="/korrupcia/all" class="nav-item nav-link">Коррупция</a>
-                <a href="/criminal/all" class="nav-item nav-link">Криминал</a>
-<!--                  <a href="/release/all/" class="nav-item nav-link">Пресс-релизы</a>-->
-                  <a href="/departments/all" class="nav-item nav-link">Пресс-релизы</a>
-                 <a href="/analitika/all" class="nav-item nav-link">Аналитика</a>
-                <a href="/reporter/all" class="nav-item nav-link">Осведомители</a>
+                <a href="/korrupcia/all" class="nav-item nav-link">{% trans "Коррупция" %}</a>
+                <a href="/criminal/all" class="nav-item nav-link">{% trans "Криминал" %}</a>
+<!--                <a href="/release/all/" class="nav-item nav-link">Пресс-релизы</a>-->
+                 <a href="/departments/all" class="nav-item nav-link">{% trans "Пресс-релизы"%}</a>
+                <a href="/analitika/all" class="nav-item nav-link">{% trans "Аналитика" %}</a>
+                <a href="/reporter/all" class="nav-item nav-link">{% trans Осведомители %}</a>
 
             </div>
-            <div class="input-group ml-auto d-none d-lg-flex" style="width: 100%; max-width: 300px;">
+            <div class="input-group ml-auto d-none d-lg-flex text-right" style="width: 100%; max-width: 300px;">
                 <input type="text" class="form-control border-0" placeholder="Поиск...">
                 <div class="input-group-append">
-                    <button class="input-group-text bg-primary text-dark border-0 px-3"><i class="fa fa-search"></i></button>
+                    <button class="input-group-text bg-primary text-dark border-0 px-3"><i class="fa fa-search"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -114,28 +125,29 @@
 </div>
 <!-- Navbar End -->
 {% block page_content %}
-    {% endblock %}
+{% endblock %}
 
 
-           <!-- Popular News End -->
-                        <!-- Footer Start -->
-                        <div class="container-fluid py-4 px-sm-3 px-md-5" style="background: #111111;">
-                            <p class="m-0 text-center">&copy; <a href="#">УРУУ.KG</a> Все права защищены.
-                        </div>
-                        <!-- Footer End -->
-                        <!-- Back to Top -->
-                        <a href="#" class="btn btn-primary btn-square back-to-top"><i class="fa fa-arrow-up"></i></a>
-                        <!-- JavaScript Libraries -->
+<!-- Popular News End -->
+<!-- Footer Start -->
+<div class="container-fluid py-4 px-sm-3 px-md-5" style="background: #111111;">
+    <p class="m-0 text-center">&copy; <a href="#">УУРУ.НЕТ</a> {% trans "Все права защищены" %}.
+</div>
+<!-- Footer End -->
+<!-- Back to Top -->
+<a href="#" class="btn btn-primary btn-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+<!-- JavaScript Libraries -->
 
 <!-- Main News Slider Start -->
 
 
- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-                        <script src="{% static 'lib/easing/easing.min.js' %}"></script>
-                        <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'lib/easing/easing.min.js' %}"></script>
+<script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/lightbox.min.js' %}"></script>
 
-                        <!-- Template Javascript -->
-                        <script src="{% static 'js/main.js' %}"></script>
+<!-- Template Javascript -->
+<script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

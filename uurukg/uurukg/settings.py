@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'app',
     'hitcount',
     'ckeditor',
-    'ckeditor_uploader'
+    'ckeditor_uploader',
+
+    'modeltranslation'
 ]
 
 MIDDLEWARE = [
@@ -54,6 +56,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
+
 ]
 
 ROOT_URLCONF = 'uurukg.urls'
@@ -69,6 +75,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'django.template.context_processors.i18n',
             ],
         },
     },
@@ -112,10 +120,16 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-ru'
 
+gettext = lambda s: s
 LANGUAGES = (
-    ('ru', 'Russian'),
-    ('kg', 'Kyrgyzstan'),
+    ('ru', gettext('Russian')),
+    ('ky', gettext('Kyrgyzstan')),
 )
+
+# LANGUAGES = [
+#     ('ru', 'Russian'),
+#     ('ky', 'Kyrgyz'),
+# ]
 
 TIME_ZONE = 'Asia/Bishkek'
 
@@ -123,6 +137,11 @@ USE_I18N = True
 
 USE_TZ = True
 
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+    # 'locale',
+    # os.path.join(PROJECT_DIR, 'locale'),
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

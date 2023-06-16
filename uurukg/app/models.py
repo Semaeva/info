@@ -12,15 +12,17 @@ from embed_video.fields import EmbedVideoField
 from ckeditor.fields import RichTextField
 from hitcount.models import HitCountMixin, HitCount
 from hitcount.views import HitCountDetailView
+from modeltranslation.fields import TranslationField
 
 
 class Post(models.Model, HitCountMixin):
     title = models.CharField(max_length=225)
+    # title = models.CharField(max_length=225)
     overview = RichTextField()
     category = models.ForeignKey("Category", on_delete=models.CASCADE, blank=True, null=True)
     created_date = models.DateField(auto_now_add=False)
     image = models.ImageField(upload_to='newsImage/', blank=False, null=False)
-    description = models.TextField(default='')
+    description = models.TextField(default='', max_length=180, blank=False, null=False)
     top_news = models.BooleanField(default=False)
 
     def __str__(self):

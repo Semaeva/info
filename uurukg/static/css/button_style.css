@@ -1,5 +1,5 @@
 .text-primary {
-    color: #CE0B0B !important;
+    color: #bf0202 !important;
 }
 
 a {
@@ -123,7 +123,7 @@ a {
 .navbar-dark .navbar-nav .nav-link:hover,
 .navbar-dark .navbar-nav .nav-link.active {
   color: white;
-  background: #CE0B0B;
+  background: #f00;
 }
 
 .main-carousel .owl-dot.active {
@@ -151,12 +151,13 @@ a {
 
 a.badge-primary:hover, a.badge-primary:focus {
   color: white;
-  background-color: #8D7979;
+  background-color: #f00;
 }
 
 .btn {
     color: #fff;
-    background-color: #bf0202;
+    background-color: #911111;
+    border-color: #31404B;
 }
 
 .btn:hover{
@@ -166,4 +167,20 @@ a.badge-primary:hover, a.badge-primary:focus {
 
 .border-warning {
     border-color: #bf0202 !important;
+}
+
+.text-warning {
+    color: #b31515 !important;
+}
+
+.dropdown-menu a{
+    color: #white !important;
+}
+
+
+img {
+    vertical-align: middle;
+    max-width: 100%;
+    border-style: none;
+    height: auto;
 }

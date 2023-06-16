@@ -2,50 +2,107 @@
 {% block page_content %}
 {% load embed_video_tags %}
 {% load static %}
-
-<div class="pt-4">
-<h2 class="text-center">{{ post.title }}</h2>
-<div class="row mx-5">
-   <div class="text-dark"> {{ post.overview | safe }}</div>
-</div>
-</div>
-
-<div class="py-3">
-
-<!--{% for i in post.newsImage.all %}-->
-<!--<div class="container">-->
-<!--    <div class="row">-->
-<!--        <div class="col-md-4">-->
-<!--            {% if i %}-->
-<!--            <a href="image1.jpg" data-toggle="lightbox" data-gallery="gallery">-->
-<!--                    <img src="{{ i.image.url }}" class="img-fluid rounded-start" style="width: 400px;">-->
-
-<!--            </a>-->
-<!--            {% endif %}-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--{% endfor %}-->
-<!--</div>-->
-
-
-<div class="container">
+<div class="container-fluid mx-auto">
     <div class="row">
-        {% for i in post.newsImage.all %}
-        <div class="col-md-4">
-
-            <a href="{{ i.image.url }}" data-toggle="lightbox" data-gallery="gallery">
-                <img src="{{ i.image.url }}" class="img-fluid">
-            </a>
+        <div class="col-lg-7 mx-auto">
+            <h2 class="text-center">{{ post.title }}</h2>
+            <div class="col">
+                <div class="text-dark"> {{ post.overview | safe }}</div>
+            </div>
         </div>
-    {% endfor %}
+        <div class="col-1"></div>
+        <div class="col-lg-3s border border-warning mr-0 mt-5 mx-auto" style="max-height: 350px">
+            <div class="row mx-5">
+                <div class="row mx-auto pb-5 pt-5">
+                    <form action="blog/search/" method="post">
+                        {% csrf_token %}
+                        <fieldset>
+                            <legend>Коррупционеры и ОПГ</legend>
+                            <p>Поиск по ФИО:</p>
+                            <input type="text" name="name" placeholder="Инициалы..." class="responsive-input"
+                                   onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>
+                            <p class="mt-3">Поиск по должности:</p>
+                            <input type="text" name="position" placeholder="Должность..." class="responsive-input"
+                                   onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>
+                            <br>
+                            <input type="submit" class="mt-3 btn" name="go" id="go" value="Поиск..."/>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<div class="d-flex justify-content-center">
+    <div id="carouselExampleControls" class="carousel slide col-6 text-center pt-5" data-ride="carousel">
+        <div class="carousel-inner">
+            {% for i in post.newsImage.all %}
+           <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <a href="{{ i.image.url }}" data-lightbox="carousel">
+          <img class="d-block w-100" src="{{ i.image.url}}">
+        </a>
+      </div>
+            {% endfor %}
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+ <script>
+ // noinspection JSUnresolvedVariable
+  $('.carousel-inner').on('click', 'img', function() {
+    var modal = $('<div class="modal" tabindex="-1" role="dialog"></div>');
+    var modalDialog = $('<div class="modal-dialog modal-lg" role="document"></div>');
+    var modalContent = $('<div class="modal-content"></div>');
+    var modalBody = $('<div class="modal-body text-center"></div>');
 
 
+    var enlargedImage = $('<img class="img-fluid">');
+    enlargedImage.attr('src', $(this).attr('src'));
+
+    modalBody.append(enlargedImage);
+    modalContent.append(modalBody);
+    modalDialog.append(modalContent);
+    modal.append(modalDialog);
 
 
+    $('body').append(modal);
+    modal.modal('show');
+
+    modal.on('hidden.bs.modal', function() {
+      modal.remove();
+    });
+
+
+    var carouselId = $(this).closest('.carousel').attr('id');
+    var currentIndex = $(this).closest('.carousel-item').index();
+
+    var prevButton = $('<a class="carousel-control-prev" href="#' + carouselId + '" role="button" data-slide="prev"></a>');
+    prevButton.append('<span class="carousel-control-prev-icon" aria-hidden="true"></span>');
+    prevButton.append('<span class="sr-only">Previous</span>');
+
+    var nextButton = $('<a class="carousel-control-next" href="#' + carouselId + '" role="button" data-slide="next"></a>');
+    nextButton.append('<span class="carousel-control-next-icon" aria-hidden="true"></span>');
+    nextButton.append('<span class="sr-only">Next</span>');
+
+    modalBody.append(prevButton);
+    modalBody.append(nextButton);
+
+    prevButton.on('click', function(e) {
+      e.stopPropagation();
+      $('#' + carouselId).carousel('prev');
+    });
+
+    nextButton.on('click', function(e) {
+      e.stopPropagation();
+      $('#' + carouselId).carousel('next');
+    });
+  });
+</script>
 {% endblock %}
-
-
-

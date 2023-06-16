@@ -1,5 +1,14 @@
 from django.contrib import admin
-from .models import *
+from modeltranslation.admin import TranslationAdmin
+from .models import Post, Press_release, NewsSNG, NewsImage, Category, Country, PressReleaseImage, GovnoImage, \
+    NewsSngImage, Govno, Department
+
+from .translation import PostTranslationOptions
+
+
+@admin.register(Post)
+class PostsAdmin(TranslationAdmin):
+    list_display = ('title',)
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -22,6 +31,8 @@ admin.site.register(NewsSNG)
 admin.site.register(NewsSngImage)
 admin.site.register(PressReleaseImage)
 admin.site.register(Govno)
-admin.site.register(Post)
+# admin.site.register(Post, PostAdmin)
 admin.site.register(Press_release)
 admin.site.register(Department)
+# admin.site.register(Post)
+
