@@ -1,3 +1,5 @@
+from ckeditor.fields import RichTextField
+from ckeditor.widgets import CKEditorWidget
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 from .models import Post, Press_release, NewsSNG, NewsImage, Category, Country, PressReleaseImage, GovnoImage, \
@@ -9,6 +11,14 @@ from .translation import PostTranslationOptions
 @admin.register(Post)
 class PostsAdmin(TranslationAdmin):
     list_display = ('title',)
+    formfield_overrides = {
+        RichTextField: {'widget': CKEditorWidget}
+    }
+
+    # def change_view(self, request, object_id, form_url='', extra_context=None):
+    #     extra_context = extra_context or {}
+    #     extra_context['photos'] = self.get_object(request, object_id).photos.all()
+    #     return super().change_view(request, object_id, form_url, extra_context=extra_context)
 
 
 @admin.register(Department)

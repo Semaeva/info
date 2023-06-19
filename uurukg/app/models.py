@@ -23,6 +23,7 @@ class Post(models.Model, HitCountMixin):
     image = models.ImageField('Главное изображение', upload_to='newsImage/', blank=False, null=False)
     description = models.TextField('Краткое описание', default='', max_length=180, blank=False, null=False)
     top_news = models.BooleanField('Входит в топ-новостей', default=False)
+    photos = RichTextField()
 
     def __str__(self):
         return self.title
