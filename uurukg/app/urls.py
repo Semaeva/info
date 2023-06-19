@@ -23,6 +23,7 @@ urlpatterns = [
     path('analitika/all', analitika_list),
 
     path('press_release/<int:id>/', release_list),
+    path('news/filter/all/<int:id>/', all_data_by_id),
 
     path('post/<int:pk>/', PostDetailView.as_view(), name='posts-detail'),
     path('dopinfo/<int:pk>/', GovnoDetailView.as_view(), name='dopinfo-detail'),

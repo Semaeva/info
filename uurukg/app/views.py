@@ -192,14 +192,9 @@ def search(request):
 def count_anonim(request):
     print(f'запрос {request}')
     return render(request, 'index_.html', {'test':0})
-    # ip_address = request.META.get('REMOTE_ADDR')
-    # print(f'Ip address {ip_address}')
-    # anonymous_user_count, created = AnonymousUserCount.objects.get_or_create(ip_address=ip_address)
-    # anonymous_user_count.session_key = get_random_string(32)
-    # anonymous_user_count.save()
-    #
-    # HitCountMixin.hit_count(request, anonymous_user_count)
 
-    # return render(request, 'count.html', {'anonymous_user_count': anonymous_user_count})
 
+def all_data_by_id(request, id):
+    news = Post.objects.filter(category=id)
+    return render(request, 'all_filter_news.html', {'news': news})
 
