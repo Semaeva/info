@@ -17,13 +17,12 @@ from modeltranslation.fields import TranslationField
 
 class Post(models.Model, HitCountMixin):
     title = models.CharField('Наименование', max_length=225)
-    # title = models.CharField(max_length=225)
     overview = RichTextField('Полное описание')
-    category = models.ForeignKey("Category", on_delete=models.CASCADE, blank=True, null=True)
-    created_date = models.DateField('Дата создания',auto_now_add=False)
-    image = models.ImageField('Главная фотография', upload_to='newsImage/', blank=False, null=False)
+    category = models.ForeignKey("Category", on_delete=models.CASCADE, blank=True, null=True, verbose_name='Категории новостей')
+    created_date = models.DateField('Дата создания', auto_now_add=False)
+    image = models.ImageField('Главное изображение', upload_to='newsImage/', blank=False, null=False)
     description = models.TextField('Краткое описание', default='', max_length=180, blank=False, null=False)
-    top_news = models.BooleanField('Топ новость',default=False)
+    top_news = models.BooleanField('Входит в топ-новостей', default=False)
 
     def __str__(self):
         return self.title
@@ -35,13 +34,13 @@ class Post(models.Model, HitCountMixin):
 
 
 class Press_release(models.Model):
-    title = models.CharField(max_length=225)
-    overview = RichTextField()
-    departments = models.ForeignKey("Department", on_delete=models.CASCADE, blank=True, null=True)
-    created_date = models.DateField(auto_now_add=False)
-    image = models.ImageField(upload_to='pressRelease/',  blank=False, null=False)
-    description = models.TextField(default='')
-    top_news = models.BooleanField(default=False)
+    title = models.CharField('Наименование', max_length=225)
+    overview = RichTextField('Полное описание')
+    departments = models.ForeignKey("Department", on_delete=models.CASCADE, blank=True, null=True, verbose_name='Министерство/учреждениеы')
+    created_date = models.DateField(auto_now_add=False, verbose_name='Дата публикации')
+    image = models.ImageField(upload_to='pressRelease/',  blank=False, null=False, verbose_name='Главное изображение')
+    description = models.TextField(default='', verbose_name='Краткое описание')
+    top_news = models.BooleanField(default=False, verbose_name='Входит в топ-новостей')
 
     def __str__(self):
         return self.title
@@ -53,13 +52,13 @@ class Press_release(models.Model):
 
 
 class NewsSNG(models.Model):
-    title = models.CharField(max_length=225)
-    overview = RichTextField()
-    sng = models.ForeignKey("Country", on_delete=models.CASCADE, blank=True, null=True)
-    created_date = models.DateField(auto_now_add=False)
-    image = models.ImageField(upload_to='pressRelease/',  blank=False, null=False)
-    description = models.TextField(default='')
-    top_news = models.BooleanField(default=False)
+    title = models.CharField('Наименование', max_length=225)
+    overview = RichTextField('Полное описание')
+    sng = models.ForeignKey("Country", on_delete=models.CASCADE, blank=True, null=True, verbose_name='Страна')
+    created_date = models.DateField(auto_now_add=False, verbose_name='Дата публикации')
+    image = models.ImageField(upload_to='pressRelease/',  blank=False, null=False, verbose_name='Главное изображение')
+    description = models.TextField(default='', verbose_name='Краткое описание')
+    top_news = models.BooleanField(default=False, verbose_name='Входит в топ-новостей')
 
     def __str__(self):
         return self.title

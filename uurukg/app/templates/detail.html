@@ -8,13 +8,14 @@
             <h2 class="text-center">{{ post.title }}</h2>
             <div class="col">
                 <div class="text-dark"> {{ post.overview | safe }}</div>
+                 <img src="{{ post.image.url | safe }}">
             </div>
         </div>
         <div class="col-1"></div>
         <div class="col-lg-3s border border-warning mr-0 mt-5 mx-auto" style="max-height: 350px">
             <div class="row mx-5">
                 <div class="row mx-auto pb-5 pt-5">
-                    <form action="blog/search/" method="post">
+                    <form action="/blog/search/" method="post">
                         {% csrf_token %}
                         <fieldset>
                             <legend>Коррупционеры и ОПГ</legend>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-16 16:33+0600\n"
+"POT-Creation-Date: 2023-06-19 15:02+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,6 +53,10 @@ msgstr "Пресс-релиздер"
 #: .\app\templates\base.html:112
 msgid "Аналитика"
 msgstr "Аналитика"
+
+#: .\app\templates\base.html:113
+msgid "Осведомители"
+msgstr "Информаторлор"
 
 #: .\app\templates\base.html:134
 msgid "Все права защищены"
