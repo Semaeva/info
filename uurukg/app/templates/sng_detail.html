@@ -2,14 +2,15 @@
 {% block page_content %}
 {% load embed_video_tags %}
 {% load static %}
+{% load i18n %}
 
 <div class="container-fluid mx-auto">
     <div class="row">
         <div class="col-lg-7 mx-auto">
-            <h4>Новости СНГ</h4>
-            <h2 class="text-center">{{ newssng.title }}</h2>
+             <a class="text-title-style">Новости СНГ</a>
+            <h2 class="text-center pt-4">{{ newssng.title }}</h2>
             <div class="col">
-                <div class="text-dark"> {{ newssng.overview | safe }}</div>
+                <div class="text-dark pt-4"> {{ newssng.overview | safe }}</div>
             </div>
             <div class="col">
                <img src="{{ newssng.image.url | safe }}">
@@ -19,12 +20,15 @@
         <div class="col-lg-3s border border-warning mr-0 mt-5 mx-auto" style="max-height: 350px">
             <div class="row mx-5">
                 <div class="row mx-auto pb-5 pt-5">
-                    <form action="/blog/search/" method="post">
+                        <form action="/blog/search/" method="post">
                         {% csrf_token %}
                         <fieldset>
                             <legend>Коррупционеры и ОПГ</legend>
                             <p>Поиск по ФИО:</p>
-                            <input type="text" name="name" placeholder="Инициалы..." class="responsive-input"
+                            <input type="text" name="surname" placeholder="Фамилия..." class="responsive-input"
+                                   onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>
+                            <div class="py-1"></div>
+                            <input type="text" name="name" placeholder="Имя..." class="responsive-input"
                                    onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>
                             <p class="mt-3">Поиск по должности:</p>
                             <input type="text" name="position" placeholder="Должность..." class="responsive-input"
@@ -51,11 +55,11 @@
         </div>
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
+            <span class="sr-only">{% trans 'Пред.' %}</span>
         </a>
         <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
+            <span class="sr-only">{% trans 'След.' %}</span>
         </a>
     </div>
 </div>

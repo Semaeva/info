@@ -2,7 +2,7 @@
 
 {% extends 'base.html' %}
 {% block page_content %}
-
+{% load i18n %}
 {% load static %}
 
 <div class="container-fluid pt-5">
@@ -12,12 +12,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="section-title text-center">
-                                    <h4 class="m-0 text-uppercase text-center font-weight-bold" id="economica">Пресс-релизы: {{ news.0.departments.title }}</h4>
+                                    <h4 class="m-0 text-uppercase text-center font-weight-bold" id="economica">{% trans 'Пресс-релизы' %}: {{ news.0.departments.title }}</h4>
                                 </div>
                             </div>
                             {% for i in news %}
                             <div class="col-lg-4" style="text-overflow: ellipsis">
-                                <div class="position-relative mb-3">
+                                <div class="position-relative mb-3 mx-auto">
                                     <img class="img-fluid w-100" src="{{ i.image.url }}"
                                          style="object-fit: cover;">
                                     <div class="bg-white border border-top-0 p-4">
@@ -32,7 +32,7 @@
                                     <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
                                         <div class="d-flex align-items-center">
                                         </div>
-                                        <div class="d-flex align-items-center btn">
+                                        <div class="d-flex align-items-center btn mt-5"">
                                             <a href="/release/{{i.id}}" class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"  >Читать поробнее...</a>
                                         </div>
                                     </div>
@@ -46,10 +46,10 @@
         </div>
 <div class="col-lg-10 text-right mb-3 mt-3">
   {% if page.has_previous %}
-        <a href="?page={{page.previous_page_number}}" class="btn btn-secondary mx-2">Пред.</a>
+        <a href="?page={{page.previous_page_number}}" class="btn btn-secondary mx-2">{% trans "Пред." %}</a>
     {% endif %}
 
-    <a href="?page=1" class="btn btn-secondary">Первая</a>
+    <a href="?page=1" class="btn btn-secondary">{% trans "Первая" %}</a>
 
     {% for num in news.paginator.page_range %}
 
@@ -60,10 +60,10 @@
         {% endif %}
     {% endfor %}
 
-    <a href="?page={{page.paginator.num_pages}}" class="btn btn-secondary mx-2">Последняя</a>
+    <a href="?page={{page.paginator.num_pages}}" class="btn btn-secondary mx-2">{% trans "След." %}</a>
 
     {% if page.has_next %}
-        <a href="?page={{page.next_page_number}}" class="btn btn-secondary mx-2">След.</a>
+        <a href="?page={{page.next_page_number}}" class="btn btn-secondary mx-2">{% trans "След." %}</a>
     {% endif %}
-    </div>
+</div>
      {% endblock %}

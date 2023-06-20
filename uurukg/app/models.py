@@ -151,7 +151,7 @@ class Govno(models.Model, HitCountMixin):
     # dop_info = models.TextField(default='', blank=True, null=True)
     resume = RichTextField('Основная деятесльность')
     dop_info = RichTextField('Дополнительная информация')
-    created_date = models.DateField('Дата события', auto_now_add=False)
+    created_date = models.DateField('Дата публикации статьи', auto_now_add=False)
     criminal_record = models.BooleanField('Судимость', default=False)
     years = models.CharField('Годы судимости', max_length=100)
     image = models.ImageField('Фотографии', upload_to='avatars/',  blank=False, null=False)

@@ -92,7 +92,7 @@ a {
 
 .badge-primary {
     color: white;
-    background-color: #bf0202;
+    background-color: #911111;
 }
 
 .progress-bar {
@@ -151,7 +151,7 @@ a {
 
 a.badge-primary:hover, a.badge-primary:focus {
   color: white;
-  background-color: #f00;
+  background-color: #bf0202;
 }
 
 .btn {
@@ -183,4 +183,10 @@ img {
     max-width: 100%;
     border-style: none;
     height: auto;
+}
+
+.text-title-style {
+    size: 12px;
+    color: red;
+    text-decoration: none;
 }

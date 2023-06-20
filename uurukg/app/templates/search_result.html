@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 {% block page_content %}
-
+{% load i18n %}
 {% load static %}
 {% if person %}
 
 
 {% for item in person %}
 <div class="col-8 mx-auto">
-    <h1 class="my-5">Результаты поиска:</h1>
+    <h1 class="my-5">{% trans "Результаты поиска" %}:</h1>
     <a href="/dopinfo/{{item.id}}" class="list-group-item list-group-item-action">
         <div class="media">
             <img src="{{ item.image.url }}" class="mr-3" alt="Изображение новости 1" width="200px">
             <div class="media-body">
                 <h2 class="btn">{{ item.name }} {{ item.surname }}</h2>
-
-                <h4 class="mt-0 text-left">{{ item.birth }}</h4>
-                <p class="mb-1">{{ item.department }}</p>
+                <p class="mt-0 text-left">{% trans "Дата рождения" %}: <strong>{{ item.birth }} </strong></p>
+<!--                <p class="mb-1">Место работы: <strong>{{ item.department }}</strong></p>-->
+                <p class="mb-1">{% trans "Должность" %}: <strong>{{ item.position }}</strong></p>
                 <!--        <small>{{ item.criminal_record }}</small>-->
             </div>
         </div>

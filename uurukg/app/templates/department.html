@@ -1,25 +1,24 @@
 {% extends 'base.html' %}
 {% block page_content %}
-
+{% load i18n %}
 {% load static %}
 <div class="py-3 ml-2 mr-2">
-<h2 class="text-center">Пресс-релизы</h2>
-
-<div class="row text-dark">
-       {% for item in department %}
-<div class="card border-secondary mb-3" style="max-width: 18rem;">
-  <div class="card-header"><h1 class="card-title text-center">{{ item.title }}</h1></div>
-  <div class="card-body text-secondary">
-    <p class="card-text"><img src="{{ item.image.url }}" class="card-img-top" height="200px;"></p>
-      <div class="text-center">
-      <a href="/press_release/{{item.id}}/" class="btn"><h6 class="card-title text-center text-white">Читать новости</h6></a>
-      </div>
-  </div>
-</div>
-
-{% endfor %}
-</div>
+    <h2 class="text-center mx-auto">{% trans 'Пресс-релизы' %}</h2>
+    <div class="row text-dark col-10 mx-auto pt-3">
+        {% for item in department %}
+        <div class="card border-secondary mb-3 mx-3" style="max-width: 18rem;">
+            <div class="card-header"><h1 class="card-title text-center">{{ item.title }}</h1></div>
+            <div class="card-body text-secondary">
+                <p class="card-text"><img src="{{ item.image.url }}" class="card-img-top" height="200px;"></p>
+                <div class="text-center">
+                    <a href="/press_release/{{item.id}}/"
+                       class="btn"><h6
+                            class="card-title text-center text-white">{% trans 'Читать подробнее' %}...</h6></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock %}
-

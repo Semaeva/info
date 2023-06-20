@@ -202,5 +202,8 @@ def count_anonim(request):
 
 def all_data_by_id(request, id):
     news = Post.objects.filter(category=id)
-    return render(request, 'all_filter_news.html', {'news': news})
+    paginated = Paginator(news, 9)
+    page_number = request.GET.get('page')
+    page = paginated.get_page(page_number)
+    return render(request, 'all_filter_news.html', {'news': page})
 

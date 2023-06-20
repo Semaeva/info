@@ -2,7 +2,7 @@
 {% load embed_video_tags %}
 
 {% block page_content %}
-
+{% load i18n %}
 {% load static %}
 
 
@@ -14,28 +14,42 @@
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title"><strong>ФИО: </strong>{{ govno.name }} {{ item.surname }}</h5>
-        <h5 class="card-title"><strong>Дата Рождения: </strong>{{ govno.birth }}</h5>
-        <h6 class="card-text"><strong>Должность: </strong>{{ govno.position }}</h6>
-        <h6 class="card-text"><h6><strong>Основная деятельность: </strong>{{ govno.resume | safe }}</h6>
+        <h6 class="card-title"><strong>{% trans "ФИО" %}: </strong>{{ govno.name }} {{ item.surname }}</h6>
+        <h6 class="card-title"><strong>{% trans "Дата рождения" %}: </strong>{{ govno.birth }}</h6>
+        <h6 class="card-text"><strong>{% trans "Должность" %}: </strong>{{ govno.position }}</h6>
+        <h6 class="card-text"><strong>{% trans "Основная деятельность" %}: </strong>{{ govno.resume | safe }}</h6>
         {% if govno.criminal_record  %}
-        <h6 class="card-text"><strong>Судимость: </strong>Да</h6>
+        <h6 class="card-text"><strong>{% trans "Судимость" %}: </strong>Да</h6>
             {% if govno.years  %}
-                  <h6 class="card-text"><strong>Годы судимости: </strong>{{ govno.years }}</h6>
+                  <h6 class="card-text"><strong>{% trans "Годы судимости" %}: </strong>{{ govno.years }}</h6>
             {% endif %}
         {% else %}
-        <h6 class="card-text"><strong>Судимость: </strong>Нет</h6>
+        <h6 class="card-text"><strong>{% trans "Судимость" %}: </strong>Нет</h6>
         {% endif %}
-        <h6 class="card-text"><strong>Дополнительная информация: </strong><div>{{ govno.dop_info | safe}}</div></h6>
+        <h6 class="card-text"><strong>{% trans "Дополнительная информация" %}: </strong><div>{{ govno.dop_info | safe}}</div></h6>
 
         {% if govno.video %}
         {% video govno.video small %}
         {% endif %}
+            <div>{% trans "Опубликовано" %}: {{ govno.created_date }}</div>
     </div>
   </div>
 </div>
 </div>
           <img src="{{ govno.govnoImage.url }}">
+</div>
+<div class="container">
+
+  <div class="row gallery">
+      {% for p in govno.govnoImage.all %}
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <a href="{{ p.image.url }}" data-fancybox="gallery">
+            <img src="{{ p.image.url }}" alt="Image 1">
+          </a>
+        </div>
+      {% endfor %}
+  </div>
+</div>
 
 
 

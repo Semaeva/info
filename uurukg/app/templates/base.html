@@ -52,21 +52,7 @@
             </nav>
         </div>
     </div>
-      <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
-                        <input name="next" type="hidden" value="{{ redirect_to }}">
-                        <select name="language">
-                            {% get_current_language as LANGUAGE_CODE %}
-                            {% get_available_languages as LANGUAGES %}
-                            {% get_language_info_list for LANGUAGES as languages %}
-                            {% for language in languages %}
-                                <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
-                                        selected{% endif %}>
-                                    {{ language.name_local }} ({{ language.code }})
-                                </option>
-                            {% endfor %}
-                        </select>
-                        <input type="submit" value="Go">
-                    </form>
+
     <div class="row align-items-center bg-white py-3 px-lg-5">
         <div class="col-lg-4">
             <a href="/" class="navbar-brand p-0 d-none d-lg-block">
@@ -86,7 +72,7 @@
 
 
 <!-- Navbar Start -->
-<div class="container-fluid p-0">
+<div class="container-fluid p-0 mb-3">
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-0 py-lg-0 px-lg-5">
         <a href="/" class="navbar-brand d-block d-lg-none">
             <h1 class="m-0 display-4 text-uppercase text-primary">УРУУ<span
@@ -114,13 +100,29 @@
                 <a href="/reporter/all" class="nav-item nav-link">{% trans "Осведомители" %}</a>
 
             </div>
-            <div class="input-group ml-auto d-none d-lg-flex text-right" style="width: 100%; max-width: 300px;">
-                <input type="text" class="form-control border-0" placeholder="Поиск...">
-                <div class="input-group-append">
-                    <button class="input-group-text bg-primary text-dark border-0 px-3"><i class="fa fa-search"></i>
-                    </button>
-                </div>
-            </div>
+                  <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}">
+                        <select name="language">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% get_language_info_list for LANGUAGES as languages %}
+                            {% for language in languages %}
+                                <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
+                                        selected{% endif %}>
+                                    {{ language.name_local }} ({{ language.code }})
+                                </option>
+                            {% endfor %}
+                        </select>
+                       <input type="submit" class="btn" value="Ok">
+<!--                        <input type="submit" value="Go">-->
+                    </form>
+<!--            <div class="input-group ml-auto d-none d-lg-flex text-right" style="width: 100%; max-width: 300px;">-->
+<!--                <input type="text" class="form-control border-0" placeholder="Поиск...">-->
+<!--                <div class="input-group-append">-->
+<!--                    <button class="input-group-text bg-primary text-dark border-0 px-3"><i class="fa fa-search"></i>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </nav>
 </div>
