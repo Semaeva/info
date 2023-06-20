@@ -23,7 +23,7 @@ class Post(models.Model, HitCountMixin):
     image = models.ImageField('Главное изображение', upload_to='newsImage/', blank=False, null=False)
     description = models.TextField('Краткое описание', default='', max_length=180, blank=False, null=False)
     top_news = models.BooleanField('Входит в топ-новостей', default=False)
-    photos = RichTextField()
+    # photos = RichTextField()
 
     def __str__(self):
         return self.title
@@ -71,7 +71,8 @@ class NewsSNG(models.Model):
 
 
 class NewsImage(models.Model):
-    image = models.ImageField(upload_to='news/detail/')
+    image = models.FileField(upload_to='news/detail/')
+    # image = models.ImageField(upload_to='news/detail/')
     news = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True, null=True, related_name='newsImage')
 
     def __str__(self):
@@ -164,7 +165,7 @@ class Govno(models.Model, HitCountMixin):
 
 
 class GovnoImage(models.Model):
-    image = models.ImageField(upload_to='govno/detail/')
+    image = models.FileField(upload_to='govno/detail/')
     govno = models.ForeignKey(Govno, on_delete=models.CASCADE, blank=True, null=True, related_name='govnoImage')
 
     def __str__(self):

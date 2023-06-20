@@ -4,21 +4,55 @@ from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 from .models import Post, Press_release, NewsSNG, NewsImage, Category, Country, PressReleaseImage, GovnoImage, \
     NewsSngImage, Govno, Department
-
 from .translation import PostTranslationOptions
+
+
+# галерея -------------------------//--------------------------------------
+class PostImageAdmin(admin.StackedInline):
+    model = NewsImage
 
 
 @admin.register(Post)
 class PostsAdmin(TranslationAdmin):
     list_display = ('title',)
-    formfield_overrides = {
-        RichTextField: {'widget': CKEditorWidget}
-    }
 
-    # def change_view(self, request, object_id, form_url='', extra_context=None):
-    #     extra_context = extra_context or {}
-    #     extra_context['photos'] = self.get_object(request, object_id).photos.all()
-    #     return super().change_view(request, object_id, form_url, extra_context=extra_context)
+    inlines = [PostImageAdmin]
+
+    class Meta:
+        model = Post
+
+
+class NewsSNGImageAdmin(admin.StackedInline):
+    model = NewsSngImage
+
+
+@admin.register(NewsSNG)
+class NewsSNGAdmin(TranslationAdmin):
+    list_display = ('title',)
+    inlines = [NewsSNGImageAdmin]
+
+    class Meta:
+        model = NewsSNG
+
+
+class GovnoImageAdmin(admin.StackedInline):
+    model = GovnoImage
+
+
+@admin.register(Govno)
+class GovnoAdmin(TranslationAdmin):
+    list_display = ('name', 'resume',)
+    inlines = [GovnoImageAdmin]
+
+
+class PressReleaseImageAdmin(admin.StackedInline):
+    model = PressReleaseImage
+
+
+@admin.register(Press_release)
+class PressRealeaseAdmin(TranslationAdmin):
+    list_display = ('title',)
+    inlines = [PressReleaseImageAdmin]
 
 
 @admin.register(Department)
@@ -26,23 +60,8 @@ class DepartmentAdmin(TranslationAdmin):
     list_display = ('title',)
 
 
-@admin.register(NewsSNG)
-class NewsSNGAdmin(TranslationAdmin):
-    list_display = ('title',)
-
-
-@admin.register(Govno)
-class GovnoAdmin(TranslationAdmin):
-    list_display = ('name', 'resume',)
-
-
 @admin.register(Country)
 class CountryAdmin(TranslationAdmin):
-    list_display = ('title',)
-
-
-@admin.register(Press_release)
-class PressRealeaseAdmin(TranslationAdmin):
     list_display = ('title',)
 
 
@@ -58,9 +77,9 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.site_header = 'Панель администратора UURUKG'
 admin.site.index_title = 'UURUKG'
 
-admin.site.register(NewsImage)
-admin.site.register(GovnoImage)
-admin.site.register(NewsSngImage)
-admin.site.register(PressReleaseImage)
+# admin.site.register(NewsImage)
+# admin.site.register(GovnoImage)
+# admin.site.register(NewsSngImage)
+# admin.site.register(PressReleaseImage)
 
 
