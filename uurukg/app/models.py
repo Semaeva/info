@@ -142,7 +142,8 @@ class Country(models.Model):
 
 
 class Govno(models.Model, HitCountMixin):
-    name = models.CharField('ФИО', max_length=253, default='', blank=False, null=False)
+    name = models.CharField('Имя', max_length=253, default='', blank=False, null=False)
+    surname = models.CharField('Фамилия', max_length=253, default='', blank=False, null=False)
     birth = models.DateField("Дата рождения", default=datetime.today)
     position = models.CharField('Должность', max_length=253, default='неизвестно')
     department = models.CharField('Место работы', max_length=250, default='неизвестно')

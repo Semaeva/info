@@ -165,6 +165,9 @@ def korrupcia_list(request):
 
 
 def search(request):
+    surname = process.extract(request.POST.get("surname", "Undefined"),
+                             list(Govno.objects.values_list('surname', flat=True)),
+                             scorer=fuzz.token_sort_ratio)
     person = process.extract(request.POST.get("name", "Undefined"),
                              list(Govno.objects.values_list('name', flat=True)),
                              scorer=fuzz.token_sort_ratio)
@@ -179,12 +182,15 @@ def search(request):
     for ii in position:
         if ii[1] > 50:
             data.append(ii[0])
+    for surname in surname:
+        if surname[1] > 50:
+            data.append(surname[0])
     print(f'my data ={data}')
     if data:
         for i in data:
-            persons = Govno.objects.filter(Q(name=i) | Q(position=i))
+            persons = Govno.objects.filter(Q(name=i) | Q(position=i) | Q(surname = i))
             print(data)
-            return render(request, 'search_result.html', {'person': persons})
+            return render(request, 'search_result.html', {'person': persons, 'surname': surname})
     else:
         return render(request, 'search_result.html', {'person': 0})
 
