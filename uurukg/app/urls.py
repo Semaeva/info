@@ -21,6 +21,7 @@ urlpatterns = [
     path('sng/all', sng_list),
     path('departments/all', department_list),
     path('analitika/all', analitika_list),
+    path('dop/all/', govno_list),
 
     path('press_release/<int:id>/', release_list),
     path('news/filter/all/<int:id>/', all_data_by_id),
@@ -30,6 +31,10 @@ urlpatterns = [
     path('sng/<int:pk>/', SngDetailView.as_view(), name='sng-detail'),
     path('release/<int:pk>/', ReleaseDetailView.as_view(), name='realese-detail'),
 
+#2557
+
+    # абдыракманов кошой 2561
+   # не более 2 минуты
 
 ]
 

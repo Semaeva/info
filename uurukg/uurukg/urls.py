@@ -8,7 +8,7 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin-press-centr/', admin.site.urls),
     path('', include('app.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('ii8n/', include(django.conf.urls.i18n))

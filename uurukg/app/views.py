@@ -99,13 +99,23 @@ def department_list(request):
 
 
 def economic_list(request):
+    # news = Post.objects.filter(category=2)
+    # return render(request, 'econom.html', {'news': news})
     news = Post.objects.filter(category=2)
-    return render(request, 'econom.html', {'news': news})
+    paginated = Paginator(news, 9)
+    page_number = request.GET.get('page')
+    page = paginated.get_page(page_number)
+    return render(request, 'econom.html', {'news': page})
 
 
 def sng_list(request):
+    # news = NewsSNG.objects.all()
+    # return render(request, 'sng.html', {'news': news})
     news = NewsSNG.objects.all()
-    return render(request, 'sng.html', {'news': news})
+    paginated = Paginator(news, 9)
+    page_number = request.GET.get('page')
+    page = paginated.get_page(page_number)
+    return render(request, 'sng.html', {'news': page})
 
 
 def criminal_list(request):
@@ -206,4 +216,13 @@ def all_data_by_id(request, id):
     page_number = request.GET.get('page')
     page = paginated.get_page(page_number)
     return render(request, 'all_filter_news.html', {'news': page})
+
+
+def govno_list(request):
+    news = Govno.objects.all()
+    paginated = Paginator(news, 9)
+    page_number = request.GET.get('page')
+    page = paginated.get_page(page_number)
+    return render(request, 'dop_info.html', {'news': page})
+
 

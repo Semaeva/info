@@ -40,7 +40,7 @@
                     <form action="blog/search/" method="post">
                         {% csrf_token %}
                         <fieldset>
-                            <legend>Коррупционеры и ОПГ</legend>
+                            <legend>{% trans "Коррупционеры и ОПГ" %}</legend>
                             <p>Поиск по ФИО:</p>
                             <input type="text" name="surname" placeholder="Фамилия..." class="responsive-input"
                                    onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>
@@ -53,6 +53,9 @@
                             <input type="submit" class="btn mt-4" name="go" id="go" value="Поиск..."/>
                         </fieldset>
                     </form>
+                    <div class="py-4">
+                    <a class="text-secondary font-weight-medium text-decoration-none" href="dop/all">{% trans "Смотреть все" %}...</a>
+                    </div>
                 </div>
             </div>
         </div>

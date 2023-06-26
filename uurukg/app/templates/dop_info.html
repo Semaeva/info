@@ -1,0 +1,65 @@
+
+{% extends 'base.html' %}
+{% block page_content %}
+{% load i18n %}
+{% load static %}
+
+<div class="container-fluid pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-title text-center">
+                                    <h4 class="m-0 text-uppercase text-center font-weight-bold" id="economica">{% trans "Коррупционеры и ОПГ" %} </h4>
+                                </div>
+                            </div>
+                            {% for i in news %}
+                            <div class="col-lg-4" style="text-overflow: ellipsis">
+                                <div class="position-relative mb-3">
+                                    <img class="img-fluid w-100" src="{{ i.image.url }}"
+                                         style="object-fit: cover;">
+                                    <div class="bg-white border border-top-0 p-4">
+
+                                      <h4>{{ i.name }} {{ i.surname }}</h4>
+                                         <p class="mt-0 text-left">{% trans "Дата рождения" %}: <strong>{{ i.birth }} </strong></p>
+                                         <p class="mb-1">{% trans "Должность" %}: <strong>{{ i.position }}</strong></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
+                                        <div class="d-flex align-items-center">
+                                        </div>
+                                        <div class="d-flex align-items-center btn">
+                                            <a href="/dopinfo/{{i.id}}" class="btn btn-secondary mx-2">{% trans "Читать подробнее" %}...</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="col-lg-10 text-right mb-3 mt-3">
+  {% if page.has_previous %}
+        <a href="?page={{page.previous_page_number}}" class="btn btn-secondary mx-2">{% trans "Пред." %}</a>
+    {% endif %}
+
+    <a href="?page=1" class="btn btn-secondary">{% trans "Первая" %}</a>
+
+    {% for num in news.paginator.page_range %}
+
+        {% if num == page.number %}
+            <span>{{ num }}</span>
+        {% else %}
+            <a href="?page={{num}}" class="btn btn-secondary mx-2">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    <a href="?page={{page.paginator.num_pages}}" class="btn btn-secondary mx-2">{% trans "След." %}</a>
+
+    {% if page.has_next %}
+        <a href="?page={{page.next_page_number}}" class="btn btn-secondary mx-2">{% trans "След." %}</a>
+    {% endif %}
+    </div>
+     {% endblock %}
