@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-26 17:10+0600\n"
+"POT-Creation-Date: 2023-06-27 09:45+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,13 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-
 #: .\app\templates\all_filter_news.html:48 .\app\templates\all_news.html:48
 #: .\app\templates\analitika.html:46 .\app\templates\criminal.html:47
 #: .\app\templates\dop_info.html:45 .\app\templates\econom.html:48
 #: .\app\templates\korrupcia.html:46 .\app\templates\opg.html:34
 #: .\app\templates\release.html:49 .\app\templates\reporter.html:48
-#: .\app\templates\sng.html:47 .\app\templates\sng_detail.html:58
+#: .\app\templates\sng.html:47 .\app\templates\sng_detail.html:61
 #: .\app\templates\sport.html:46
 msgid "Пред."
 msgstr "Мурунку"
@@ -48,7 +47,7 @@ msgstr "Алгачкы"
 #: .\app\templates\opg.html:51 .\app\templates\release.html:63
 #: .\app\templates\release.html:66 .\app\templates\reporter.html:62
 #: .\app\templates\reporter.html:65 .\app\templates\sng.html:61
-#: .\app\templates\sng.html:64 .\app\templates\sng_detail.html:62
+#: .\app\templates\sng.html:64 .\app\templates\sng_detail.html:65
 #: .\app\templates\sport.html:60 .\app\templates\sport.html:63
 msgid "След."
 msgstr "Кийинки"
@@ -108,11 +107,17 @@ msgstr "Информаторлор"
 msgid "Все права защищены"
 msgstr "Бардык укуктар корголгон"
 
+#: .\app\templates\detail.html:44 .\app\templates\detail.html:47
+#: .\app\templates\index.html:57 .\app\templates\index.html:70
+#: .\app\templates\index.html:113 .\app\templates\index.html:158
+#: .\app\templates\index.html:204 .\app\templates\index.html:251
+#: .\app\templates\release_detail.html:47 .\app\templates\sng_detail.html:41
+msgid "Смотреть все"
+msgstr "Баарын көрүү"
+
 #: .\app\templates\dop_info.html:14 .\app\templates\index.html:43
-#, fuzzy
-#| msgid "Коррупционеры и ОПГ"
 msgid "Коррупционеры и ОПГ"
-msgstr "Коррупционерлер"
+msgstr "Коррупционерлер жана УКТ"
 
 #: .\app\templates\dop_info.html:25 .\app\templates\dopinfo.html:18
 #: .\app\templates\search_result.html:16
@@ -133,14 +138,10 @@ msgid "Основная деятельность"
 msgstr "Негизги иш"
 
 #: .\app\templates\dopinfo.html:22 .\app\templates\dopinfo.html:27
-#, fuzzy
-#| msgid "Должность"
 msgid "Судимость"
 msgstr "Кызматы"
 
 #: .\app\templates\dopinfo.html:24
-#, fuzzy
-#| msgid "Последние новости"
 msgid "Годы судимости"
 msgstr "Акыркы малымаат"
 
@@ -155,12 +156,6 @@ msgstr "Жарыяланган"
 #: .\app\templates\index.html:38
 msgid "Количество активных пользоваталей сейчас"
 msgstr "Азыркы учурда"
-
-#: .\app\templates\index.html:57 .\app\templates\index.html:70
-#: .\app\templates\index.html:113 .\app\templates\index.html:158
-#: .\app\templates\index.html:204 .\app\templates\index.html:251
-msgid "Смотреть все"
-msgstr "Баарын көрүү"
 
 #: .\app\templates\index.html:69
 msgid "Последние новости"
@@ -177,16 +172,3 @@ msgstr ""
 #: .\uurukg\settings.py:124
 msgid "Kyrgyzstan"
 msgstr ""
-
-#, fuzzy
-#~| msgid "Последние новости"
-#~ msgid "Последняя"
-#~ msgstr "Акыркы малымаат"
-
-#, fuzzy
-#~| msgid "Последние новости"
-#~ msgid "Послед."
-#~ msgstr "Акыркы"
-
-#~ msgid "Salam"
-#~ msgstr "Главная"
