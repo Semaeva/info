@@ -22,27 +22,48 @@
                 <div class="row mx-auto pb-5 pt-5">
                     <div class="container">
 
-              <form action="/blog/search/" method="post">
-                        {% csrf_token %}
-                        <fieldset>
-                            <legend>Коррупционеры и ОПГ</legend>
-                            <p>Поиск по ФИО:</p>
-                            <input type="text" name="surname" placeholder="Фамилия..." class="responsive-input"
-                                   onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>
-                            <div class="py-1"></div>
-                            <input type="text" name="name" placeholder="Имя..." class="responsive-input"
-                                   onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>
-                            <p class="mt-3">Поиск по должности:</p>
-                            <input type="text" name="position" placeholder="Должность..." class="responsive-input"
-                                   onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>
-                            <br>
-                            <div class="row-3"> <input type="submit" class="btn mt-4" name="go" id="go" value="Поиск..."/> </div>
-                        </fieldset>
-                    </form>
+<!--              <form action="/blog/search/" method="post">-->
+<!--                        {% csrf_token %}-->
+<!--                        <fieldset>-->
+<!--                            <legend>Коррупционеры и ОПГ</legend>-->
+<!--                            <p>Поиск по ФИО:</p>-->
+<!--                            <input type="text" name="surname" placeholder="Фамилия..." class="responsive-input"-->
+<!--                                   onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>-->
+<!--                            <div class="py-1"></div>-->
+<!--                            <input type="text" name="name" placeholder="Имя..." class="responsive-input"-->
+<!--                                   onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>-->
+<!--                            <p class="mt-3">Поиск по должности:</p>-->
+<!--                            <input type="text" name="position" placeholder="Должность..." class="responsive-input"-->
+<!--                                   onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>-->
+<!--                            <br>-->
+<!--                            <div class="row-3"> <input type="submit" class="btn mt-4" name="go" id="go" value="Поиск..."/> </div>-->
+<!--                        </fieldset>-->
+<!--                    </form>-->
 
-                        <div class="row-4">
-                        <a class="btn text-secondary font-weight-medium text-decoration-none" href="/dop/all/">{% trans "Смотреть все" %}...</a>
-                    </div>
+<!--                        <div class="row-4">-->
+<!--                        <a class="btn text-secondary font-weight-medium text-decoration-none" href="/dop/all/">{% trans "Смотреть все" %}...</a>-->
+<!--                    </div>-->
+
+                    <form action="/blog/search/" method="post">
+                            {% csrf_token %}
+                            <fieldset>
+                                <legend>{% trans "Коррупционеры и ОПГ" %}</legend>
+                                <p>Поиск по ФИО:</p>
+                                <input type="text" name="surname" placeholder="Фамилия..." class="responsive-input"
+                                       onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>
+                                <div class="py-1"></div>
+                                <input type="text" name="name" placeholder="Имя..." class="responsive-input"
+                                       onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>
+                                <p class="mt-3">Поиск по должности:</p>
+                                <input type="text" name="position" placeholder="Должность..." class="responsive-input"
+                                       onfocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;"/>
+                                <br>
+                                <div class="row py-4">
+                                    <input type="submit" class="btn mr-5" name="go" id="go" value="Поиск..."/>
+                                    <a class="text-decoration-none btn" href="dop/all">{% trans "Смотреть все" %}...</a>
+                                </div>
+                            </fieldset>
+                        </form>
 <!--                     <div>-->
 <!--                    <a class="text-secondary font-weight-medium text-decoration-none" href="/dop/all/">{% trans "Смотреть все" %}...</a>-->
 <!--                    </div>-->
